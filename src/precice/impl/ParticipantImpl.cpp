@@ -401,7 +401,7 @@ void ParticipantImpl::handleDataBeforeAdvance(bool reachedTimeWindowEnd, double 
   samplizeWriteData(timeSteppedTo);
 
   if (reachedTimeWindowEnd) {
-    mapWrittenData();
+    mapWrittenData(timeSteppedTo);
     performDataActions({action::Action::WRITE_MAPPING_POST});
   }
 }
@@ -413,21 +413,12 @@ void ParticipantImpl::handleDataAfterAdvance(bool reachedTimeWindowEnd, bool isT
     return;
   }
 
-  if (reachedTimeWindowEnd) {
-    mapReadData();
-    // FIXME: the actions timing for read mappings doesn't make sense after
-    performDataActions({action::Action::READ_MAPPING_POST});
-  }
-
-  handleExports();
-
   if (isTimeWindowComplete) {
     // Move to next time window
     PRECICE_ASSERT(math::greaterEquals(timeAfterAdvance, timeSteppedTo), "We must have stayed or moved forwards in time (min-time-step-size).");
 
     // As we move forward, there may now be old samples lying around
-    // We know that timeAfterAdvance is the start time of the time window
-    trimOldDataBefore(timeAfterAdvance);
+    trimOldDataBefore(_couplingScheme->getTimeWindowStart());
 
     // Reset initial guesses for iterative mappings
     for (auto &context : _accessor->readDataContexts()) {
@@ -436,13 +427,19 @@ void ParticipantImpl::handleDataAfterAdvance(bool reachedTimeWindowEnd, bool isT
     for (auto &context : _accessor->writeDataContexts()) {
       context.resetInitialGuesses();
     }
-    return;
+  } else {
+    // We are iterating
+    PRECICE_ASSERT(math::greater(timeSteppedTo, timeAfterAdvance), "We must have moved back in time!");
+
+    trimSendDataAfter(timeAfterAdvance);
   }
 
-  // We are iterating
-  PRECICE_ASSERT(math::greater(timeSteppedTo, timeAfterAdvance), "We must have moved back in time!");
+  if (reachedTimeWindowEnd) {
+    mapReadData(timeAfterAdvance);
+    performDataActions({action::Action::READ_MAPPING_POST});
+  }
 
-  trimSendDataAfter(timeAfterAdvance);
+  handleExports();
 }
 
 void ParticipantImpl::samplizeWriteData(double time)
@@ -1385,26 +1382,26 @@ void ParticipantImpl::computeMappings(std::vector<MappingContext> &contexts, con
   }
 }
 
-void ParticipantImpl::mapWrittenData()
+void ParticipantImpl::mapWrittenData(std::optional<double> after)
 {
   PRECICE_TRACE();
   computeMappings(_accessor->writeMappingContexts(), "write");
   for (auto &context : _accessor->writeDataContexts()) {
     if (context.hasMapping()) {
       PRECICE_DEBUG("Map write data \"{}\" from mesh \"{}\"", context.getDataName(), context.getMeshName());
-      context.mapData();
+      context.mapData(after);
     }
   }
 }
 
-void ParticipantImpl::mapReadData()
+void ParticipantImpl::mapReadData(std::optional<double> after)
 {
   PRECICE_TRACE();
   computeMappings(_accessor->readMappingContexts(), "read");
   for (auto &context : _accessor->readDataContexts()) {
     if (context.hasMapping()) {
       PRECICE_DEBUG("Map read data \"{}\" to mesh \"{}\"", context.getDataName(), context.getMeshName());
-      context.mapData();
+      context.mapData(after);
     }
   }
 }

@@ -363,11 +363,11 @@ private:
   /// Helper for mapWrittenData and mapReadData
   void computeMappings(std::vector<MappingContext> &contexts, const std::string &mappingType);
 
-  /// Computes, performs, and resets all suitable write mappings.
-  void mapWrittenData();
+  /// Computes, performs, and resets suitable write mappings either entirely or after given time.
+  void mapWrittenData(std::optional<double> after = std::nullopt);
 
-  /// Computes, performs, and resets all suitable read mappings.
-  void mapReadData();
+  /// Computes, performs, and resets suitable read mappings either entirely or after given time.
+  void mapReadData(std::optional<double> after = std::nullopt);
 
   /**
    * @brief Performs all data actions with given timing.
