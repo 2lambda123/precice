@@ -87,23 +87,24 @@ bool DataContext::hasMapping() const
   return hasReadMapping() || hasWriteMapping();
 }
 
-void DataContext::mapData(std::optional<double> after)
+void DataContext::trimToDataAfter(double t)
 {
-  PRECICE_TRACE(getMeshName(), getDataName(), after.value_or(-666));
+  PRECICE_TRACE(getMeshName(), getDataName(), t);
+  PRECICE_ASSERT(hasMapping());
+  for (auto &context : _mappingContexts) {
+    context.toData->timeStepsStorage().trimAfter(t);
+  }
+}
+
+void DataContext::mapData()
+{
+  PRECICE_TRACE(getMeshName(), getDataName());
   PRECICE_ASSERT(hasMapping());
 
   // Execute the mappings
   for (auto &context : _mappingContexts) {
     PRECICE_ASSERT(!context.fromData->stamples().empty(),
                    "There must be samples at this point!");
-
-    // Reset the toData before mapping any samples
-    if (after) {
-      context.toData->timeStepsStorage().trimAfter(*after);
-    } else {
-      PRECICE_ASSERT(context.toData->timeStepsStorage().empty(),
-                     "This happens only in initialize at which point there shouldn't be any samples.");
-    }
 
     // linear lookup should be sufficient here
     const auto timestampExists = [times = context.toData->timeStepsStorage().getTimes()](double lookup) -> bool {

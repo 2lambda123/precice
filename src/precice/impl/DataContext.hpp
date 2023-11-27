@@ -79,10 +79,15 @@ public:
 
   /**
    * @brief Perform the mapping for mapping contexts and the corresponding data context (from and to data)
-   *
-   * @param[in] after only perform the above for samples after the given time
    */
-  void mapData(std::optional<double> after);
+  void mapData();
+
+  /**
+   * @brief Trims all toData of associated mappings after the given t
+   *
+   * @param[in] t the time after which to trim data
+   */
+  void trimToDataAfter(double t);
 
   /**
    * @brief Adds a MappingContext and the MeshContext required by the mapping to the corresponding DataContext data structures.

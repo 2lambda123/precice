@@ -401,7 +401,7 @@ void ParticipantImpl::handleDataBeforeAdvance(bool reachedTimeWindowEnd, double 
   samplizeWriteData(timeSteppedTo);
 
   if (reachedTimeWindowEnd) {
-    mapWrittenData(timeSteppedTo);
+    mapWrittenData();
     performDataActions({action::Action::WRITE_MAPPING_POST});
   }
 }
@@ -1382,14 +1382,14 @@ void ParticipantImpl::computeMappings(std::vector<MappingContext> &contexts, con
   }
 }
 
-void ParticipantImpl::mapWrittenData(std::optional<double> after)
+void ParticipantImpl::mapWrittenData()
 {
   PRECICE_TRACE();
   computeMappings(_accessor->writeMappingContexts(), "write");
   for (auto &context : _accessor->writeDataContexts()) {
     if (context.hasMapping()) {
       PRECICE_DEBUG("Map write data \"{}\" from mesh \"{}\"", context.getDataName(), context.getMeshName());
-      context.mapData(after);
+      context.mapData();
     }
   }
 }
@@ -1401,7 +1401,10 @@ void ParticipantImpl::mapReadData(std::optional<double> after)
   for (auto &context : _accessor->readDataContexts()) {
     if (context.hasMapping()) {
       PRECICE_DEBUG("Map read data \"{}\" to mesh \"{}\"", context.getDataName(), context.getMeshName());
-      context.mapData(after);
+      if (after) {
+        context.trimToDataAfter(*after);
+      }
+      context.mapData();
     }
   }
 }
