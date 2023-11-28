@@ -267,6 +267,13 @@ public:
   /// @todo try to remove or make private. See https://github.com/precice/precice/issues/1269
   const mesh::Mesh &mesh(const std::string &meshName) const;
 
+  struct MappedSamples {
+    int write, read;
+  };
+
+  /// Returns the amount of mapped read and write samples in the last call to advance.
+  MappedSamples mappedSamples() const;
+
   /// Disable copy construction
   ParticipantImpl(ParticipantImpl const &) = delete;
 
@@ -326,6 +333,12 @@ private:
 
   /// Counts calls to advance for plotting.
   long int _numberAdvanceCalls = 0;
+
+  /// Counts the amount of samples mapped in write mappings executed in the latest advance
+  int _executedWriteMappings = 0;
+
+  /// Counts the amount of samples mapped in read mappings executed in the latest advance
+  int _executedReadMappings = 0;
 
   /**
    * @brief Configures the coupling interface from the given xml file.

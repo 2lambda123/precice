@@ -389,6 +389,9 @@ void ParticipantImpl::advance(
 
   PRECICE_INFO(_couplingScheme->printCouplingState());
 
+  PRECICE_DEBUG("Mapped {} samples in write mappings and {} samples in read mappings",
+                _executedWriteMappings, _executedReadMappings);
+
   _meshLock.lockAll();
 
   sep.pop();
@@ -399,6 +402,10 @@ void ParticipantImpl::advance(
 void ParticipantImpl::handleDataBeforeAdvance(bool reachedTimeWindowEnd, double timeSteppedTo)
 {
   samplizeWriteData(timeSteppedTo);
+
+  // Reset mapping counters here to cover subcycling
+  _executedReadMappings = 0;
+  _executedWriteMappings = 0;
 
   if (reachedTimeWindowEnd) {
     mapWrittenData();
@@ -1389,7 +1396,7 @@ void ParticipantImpl::mapWrittenData()
   for (auto &context : _accessor->writeDataContexts()) {
     if (context.hasMapping()) {
       PRECICE_DEBUG("Map write data \"{}\" from mesh \"{}\"", context.getDataName(), context.getMeshName());
-      context.mapData();
+      _executedWriteMappings += context.mapData();
     }
   }
 }
@@ -1404,7 +1411,7 @@ void ParticipantImpl::mapReadData(std::optional<double> after)
       if (after) {
         context.trimToDataAfter(*after);
       }
-      context.mapData();
+      _executedReadMappings += context.mapData();
     }
   }
 }

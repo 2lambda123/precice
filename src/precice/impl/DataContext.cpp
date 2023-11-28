@@ -96,10 +96,12 @@ void DataContext::trimToDataAfter(double t)
   }
 }
 
-void DataContext::mapData()
+int DataContext::mapData()
 {
   PRECICE_TRACE(getMeshName(), getDataName());
   PRECICE_ASSERT(hasMapping());
+
+  int executedMappings{0};
 
   // Execute the mappings
   for (auto &context : _mappingContexts) {
@@ -141,8 +143,10 @@ void DataContext::mapData()
 
       // Store data from mapping buffer in storage
       context.toData->setSampleAtTime(stample.timestamp, std::move(outSample));
+      ++executedMappings;
     }
   }
+  return executedMappings;
 }
 
 bool DataContext::hasReadMapping() const

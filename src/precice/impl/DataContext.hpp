@@ -79,8 +79,10 @@ public:
 
   /**
    * @brief Perform the mapping for mapping contexts and the corresponding data context (from and to data)
+   *
+   * @return the number of performed mappings
    */
-  void mapData();
+  int mapData();
 
   /**
    * @brief Trims all toData of associated mappings after the given t
