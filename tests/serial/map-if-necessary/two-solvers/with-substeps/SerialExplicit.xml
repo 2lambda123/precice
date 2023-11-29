@@ -39,10 +39,10 @@
   <m2n:sockets acceptor="One" connector="Two" />
 
   <coupling-scheme:serial-explicit>
-    <participants first="One" second="Two" />
+    <participants first="Two" second="One" />
     <max-time-windows value="3" />
     <time-window-size value="1.0" />
-    <exchange data="DataOne" mesh="MeshTwo" from="One" to="Two" substeps="false" />
-    <exchange data="DataTwo" mesh="MeshTwo" from="Two" to="One" substeps="false" />
+    <exchange data="DataOne" mesh="MeshTwo" from="One" to="Two" substeps="true" />
+    <exchange data="DataTwo" mesh="MeshTwo" from="Two" to="One" substeps="true" />
   </coupling-scheme:serial-explicit>
 </precice-configuration>

@@ -204,6 +204,8 @@ public:
   /// True if the implicit scheme has converged or no implicit scheme is defined
   bool hasConverged() const final;
 
+  bool requiresSubsteps() const final override;
+
 private:
   mutable logging::Logger _log{"cplscheme::CompositionalCouplingScheme"};
 

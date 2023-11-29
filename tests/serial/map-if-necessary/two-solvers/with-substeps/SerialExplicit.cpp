@@ -17,7 +17,7 @@ BOOST_AUTO_TEST_CASE(SerialExplicit)
   PRECICE_TEST("One"_on(1_rank), "Two"_on(1_rank));
 
   // We receive the new start sample
-  std::vector<int> readMappings{1, 1, 1};
+  std::vector<int> readMappings{2, 2, 0};
   // We write the two samples from the two time steps
   std::vector<int> writeMappings{2, 2, 2};
 

@@ -394,4 +394,14 @@ bool CompositionalCouplingScheme::hasConverged() const
   return _implicitScheme->hasConverged();
 }
 
+bool CompositionalCouplingScheme::requiresSubsteps() const
+{
+  for (auto scheme : allSchemes()) {
+    if (scheme->requiresSubsteps()) {
+      return true;
+    }
+  }
+  return false;
+}
+
 } // namespace precice::cplscheme

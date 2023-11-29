@@ -216,6 +216,11 @@ public:
 
   bool hasConverged() const override;
 
+  bool requiresSubsteps() const override final
+  {
+    return true;
+  }
+
 private:
   mutable logging::Logger _log{"cplscheme::tests::DummyCouplingScheme"};
 

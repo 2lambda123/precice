@@ -401,7 +401,10 @@ void ParticipantImpl::advance(
 
 void ParticipantImpl::handleDataBeforeAdvance(bool reachedTimeWindowEnd, double timeSteppedTo)
 {
-  samplizeWriteData(timeSteppedTo);
+  if (reachedTimeWindowEnd || _couplingScheme->requiresSubsteps()) {
+    samplizeWriteData(timeSteppedTo);
+  }
+  resetWrittenData();
 
   // Reset mapping counters here to cover subcycling
   _executedReadMappings  = 0;
@@ -455,7 +458,6 @@ void ParticipantImpl::samplizeWriteData(double time)
   for (auto &context : _accessor->writeDataContexts()) {
     context.storeBufferedData(time);
   }
-  resetWrittenData();
 }
 
 void ParticipantImpl::trimOldDataBefore(double time)

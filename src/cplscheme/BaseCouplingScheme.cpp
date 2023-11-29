@@ -856,4 +856,15 @@ double BaseCouplingScheme::getWindowEndTime() const
   return _timeWindowStartTime + getTimeWindowSize();
 }
 
+bool BaseCouplingScheme::requiresSubsteps() const
+{
+  // Global toggle if a single send data uses substeps
+  for (auto cpldata : _allData | boost::adaptors::map_values) {
+    if (cpldata->getDirection() == CouplingData::Direction::Send && cpldata->exchangeSubsteps()) {
+      return true;
+    }
+  }
+  return false;
+}
+
 } // namespace precice::cplscheme

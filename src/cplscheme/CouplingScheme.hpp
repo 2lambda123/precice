@@ -226,6 +226,9 @@ public:
 
   /// Returns false if the scheme is implicit and hasn't converged
   virtual bool hasConverged() const = 0;
+
+  /// Returns true if any send data of the scheme requires substeps
+  virtual bool requiresSubsteps() const = 0;
 };
 
 } // namespace cplscheme
