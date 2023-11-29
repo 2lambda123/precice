@@ -19,8 +19,8 @@ BOOST_AUTO_TEST_CASE(SerialImplicit)
   // 1: we fail to converge and receive a new sample for the end of the time window
   // 0: we succeed to converge and keep the sample of the end of the time window
   std::vector<int> readMappings{1, 0, 1, 0, 1, 0};
-  // 2: we map the samples from the two time steps
-  std::vector<int> writeMappings{2, 2, 2, 2, 2, 2};
+  // 1: we only map the sample from the end of the time window
+  std::vector<int> writeMappings{1, 1, 1, 1, 1, 1};
 
   runTwoSolversMappingCountImplicit(context, readMappings, writeMappings);
 }

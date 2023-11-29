@@ -18,8 +18,8 @@ BOOST_AUTO_TEST_CASE(SerialExplicit)
 
   // We receive the new start sample
   std::vector<int> readMappings{1, 1, 1};
-  // We write the two samples from the two time steps
-  std::vector<int> writeMappings{2, 2, 2};
+  // We write the sample from the end of the time window
+  std::vector<int> writeMappings{1, 1, 1};
 
   runTwoSolversMappingCountExplicit(context, readMappings, writeMappings);
 }
