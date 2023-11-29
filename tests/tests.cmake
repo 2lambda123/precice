@@ -137,6 +137,15 @@ target_sources(testprecice
     tests/serial/lifecycle/reconstruction/ConstructOnly.cpp
     tests/serial/lifecycle/reconstruction/Full.cpp
     tests/serial/lifecycle/reconstruction/ImplicitFinalize.cpp
+    tests/serial/map-if-necessary/two-solvers/helper.hpp
+    tests/serial/map-if-necessary/two-solvers/with-substeps/ParallelExplicit.cpp
+    tests/serial/map-if-necessary/two-solvers/with-substeps/ParallelImplicit.cpp
+    tests/serial/map-if-necessary/two-solvers/with-substeps/SerialExplicit.cpp
+    tests/serial/map-if-necessary/two-solvers/with-substeps/SerialImplicit.cpp
+    tests/serial/map-if-necessary/two-solvers/without-substeps/ParallelExplicit.cpp
+    tests/serial/map-if-necessary/two-solvers/without-substeps/ParallelImplicit.cpp
+    tests/serial/map-if-necessary/two-solvers/without-substeps/SerialExplicit.cpp
+    tests/serial/map-if-necessary/two-solvers/without-substeps/SerialImplicit.cpp
     tests/serial/mapping-nearest-neighbor-gradient/GradientTestBidirectionalReadScalar.cpp
     tests/serial/mapping-nearest-neighbor-gradient/GradientTestBidirectionalReadVector.cpp
     tests/serial/mapping-nearest-neighbor-gradient/GradientTestBidirectionalWriteScalar.cpp

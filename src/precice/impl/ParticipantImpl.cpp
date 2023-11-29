@@ -404,7 +404,7 @@ void ParticipantImpl::handleDataBeforeAdvance(bool reachedTimeWindowEnd, double 
   samplizeWriteData(timeSteppedTo);
 
   // Reset mapping counters here to cover subcycling
-  _executedReadMappings = 0;
+  _executedReadMappings  = 0;
   _executedWriteMappings = 0;
 
   if (reachedTimeWindowEnd) {
@@ -1541,6 +1541,14 @@ const mesh::Mesh &ParticipantImpl::mesh(const std::string &meshName) const
 {
   PRECICE_TRACE(meshName);
   return *_accessor->usedMeshContext(meshName).mesh;
+}
+
+ParticipantImpl::MappedSamples ParticipantImpl::mappedSamples() const
+{
+  MappedSamples res;
+  res.read  = _executedReadMappings;
+  res.write = _executedWriteMappings;
+  return res;
 }
 
 } // namespace precice::impl
