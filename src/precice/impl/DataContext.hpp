@@ -80,9 +80,11 @@ public:
   /**
    * @brief Perform the mapping for mapping contexts and the corresponding data context (from and to data)
    *
+   * @param[in] after only map samples after this optional time
+   *
    * @return the number of performed mappings
    */
-  int mapData();
+  int mapData(std::optional<double> after = std::nullopt);
 
   /**
    * @brief Trims all toData of associated mappings after the given t

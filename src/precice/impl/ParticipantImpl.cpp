@@ -411,7 +411,7 @@ void ParticipantImpl::handleDataBeforeAdvance(bool reachedTimeWindowEnd, double 
   _executedWriteMappings = 0;
 
   if (reachedTimeWindowEnd) {
-    mapWrittenData();
+    mapWrittenData(_couplingScheme->getTimeWindowStart());
     performDataActions({action::Action::WRITE_MAPPING_POST});
   }
 }
@@ -1391,14 +1391,14 @@ void ParticipantImpl::computeMappings(std::vector<MappingContext> &contexts, con
   }
 }
 
-void ParticipantImpl::mapWrittenData()
+void ParticipantImpl::mapWrittenData(std::optional<double> after)
 {
   PRECICE_TRACE();
   computeMappings(_accessor->writeMappingContexts(), "write");
   for (auto &context : _accessor->writeDataContexts()) {
     if (context.hasMapping()) {
       PRECICE_DEBUG("Map write data \"{}\" from mesh \"{}\"", context.getDataName(), context.getMeshName());
-      _executedWriteMappings += context.mapData();
+      _executedWriteMappings += context.mapData(after);
     }
   }
 }
@@ -1413,6 +1413,7 @@ void ParticipantImpl::mapReadData(std::optional<double> after)
       if (after) {
         context.trimToDataAfter(*after);
       }
+      // We always ensure that all read data was mapped
       _executedReadMappings += context.mapData();
     }
   }

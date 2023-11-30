@@ -96,7 +96,7 @@ void DataContext::trimToDataAfter(double t)
   }
 }
 
-int DataContext::mapData()
+int DataContext::mapData(std::optional<double> after)
 {
   PRECICE_TRACE(getMeshName(), getDataName());
   PRECICE_ASSERT(hasMapping());
@@ -120,9 +120,14 @@ int DataContext::mapData()
     const auto dataDims = context.fromData->getDimensions();
 
     for (const auto &stample : context.fromData->stamples()) {
+      // skip stamples before given time
+      if (after && math::smallerEquals(stample.timestamp, *after)) {
+        PRECICE_DEBUG("Skipping stample t={} (not after {})", stample.timestamp, *after);
+        continue;
+      }
       // skip existing stamples
       if (timestampExists(stample.timestamp)) {
-        PRECICE_DEBUG("Skipping stample t={}", stample.timestamp);
+        PRECICE_DEBUG("Skipping stample t={} (exists)", stample.timestamp);
         continue;
       }
 

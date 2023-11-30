@@ -17,7 +17,7 @@ BOOST_AUTO_TEST_CASE(ParallelImplicit)
   PRECICE_TEST("A"_on(1_rank), "B"_on(1_rank), "C"_on(1_rank));
 
   std::vector<int> readMappings{3, 0, 3, 0, 3, 0};
-  std::vector<int> writeMappings{4, 5, 4, 5, 4, 5};
+  std::vector<int> writeMappings{4, 4, 4, 4, 4, 4};
 
   runMultipleSolversMappingCount(context, readMappings, writeMappings);
 }

@@ -376,10 +376,10 @@ private:
   /// Helper for mapWrittenData and mapReadData
   void computeMappings(std::vector<MappingContext> &contexts, const std::string &mappingType);
 
-  /// Computes, and performs suitable write mappings
-  void mapWrittenData();
+  /// Computes, and performs suitable write mappings either entirely or after given time
+  void mapWrittenData(std::optional<double> after = std::nullopt);
 
-  /// Computes, performs, and resets suitable read mappings either entirely or after given time.
+  // Computes, and performs read mappings optionally removes samples in toData after the optional time
   void mapReadData(std::optional<double> after = std::nullopt);
 
   /**
