@@ -10,22 +10,22 @@ BOOST_AUTO_TEST_SUITE(Integration)
 BOOST_AUTO_TEST_SUITE(Serial)
 BOOST_AUTO_TEST_SUITE(MapIfNecessary)
 BOOST_AUTO_TEST_SUITE(TwoSolvers)
-BOOST_AUTO_TEST_SUITE(WithSubsteps)
+BOOST_AUTO_TEST_SUITE(MixedSubsteps)
 
 BOOST_AUTO_TEST_CASE(SerialImplicit)
 {
   PRECICE_TEST("One"_on(1_rank), "Two"_on(1_rank));
 
-  // 2: we fail to converge and receive new samples for the substep and the end of the time window
+  // 1: we fail to converge and receive a new sample for the end of the time window
   // 0: we don't receive anything in the last step as second
-  std::vector<int> readMappings{2, 2, 2, 2, 2, 0};
+  std::vector<int> readMappings{1, 1, 1, 1, 1, 0};
   // 2: we map the samples from the two time steps
   std::vector<int> writeMappings{2, 2, 2, 2, 2, 2};
 
   runTwoSolversMappingCountImplicit(context, readMappings, writeMappings);
 }
 
-BOOST_AUTO_TEST_SUITE_END() // WithSubsteps
+BOOST_AUTO_TEST_SUITE_END() // MixedSubsteps
 BOOST_AUTO_TEST_SUITE_END() // TwoSolvers
 BOOST_AUTO_TEST_SUITE_END() // MapIfNecessary
 BOOST_AUTO_TEST_SUITE_END() // Serial

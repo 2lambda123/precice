@@ -138,6 +138,10 @@ target_sources(testprecice
     tests/serial/lifecycle/reconstruction/Full.cpp
     tests/serial/lifecycle/reconstruction/ImplicitFinalize.cpp
     tests/serial/map-if-necessary/two-solvers/helper.hpp
+    tests/serial/map-if-necessary/two-solvers/mixed-substeps/ParallelExplicit.cpp
+    tests/serial/map-if-necessary/two-solvers/mixed-substeps/ParallelImplicit.cpp
+    tests/serial/map-if-necessary/two-solvers/mixed-substeps/SerialExplicit.cpp
+    tests/serial/map-if-necessary/two-solvers/mixed-substeps/SerialImplicit.cpp
     tests/serial/map-if-necessary/two-solvers/with-substeps/ParallelExplicit.cpp
     tests/serial/map-if-necessary/two-solvers/with-substeps/ParallelImplicit.cpp
     tests/serial/map-if-necessary/two-solvers/with-substeps/SerialExplicit.cpp

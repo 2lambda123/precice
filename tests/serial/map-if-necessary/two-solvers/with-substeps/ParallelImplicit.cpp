@@ -16,7 +16,7 @@ BOOST_AUTO_TEST_CASE(ParallelImplicit)
 {
   PRECICE_TEST("One"_on(1_rank), "Two"_on(1_rank));
 
-  // 1: we fail to converge and receive a new sample for the end of the time window
+  // 2: we fail to converge and receive new samples for the substep and end of the time window
   // 0: we succeed to converge and keep the sample of the end of the time window
   std::vector<int> readMappings{2, 0, 2, 0, 2, 0};
   // 2: we map the samples from the two time steps
