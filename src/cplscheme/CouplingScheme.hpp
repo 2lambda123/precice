@@ -230,7 +230,8 @@ public:
   /// Returns true if any send data of the scheme requires substeps
   virtual bool requiresSubsteps() const = 0;
 
-  virtual std::vector<DataID> dataToReceive() const = 0;
+  /// Returns a vector of implicit data to receive in the next advance
+  virtual std::vector<DataID> implicitDataToReceive() const = 0;
 };
 
 } // namespace cplscheme

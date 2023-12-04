@@ -398,7 +398,7 @@ protected:
 
   bool requiresSubsteps() const override final;
 
-  std::vector<DataID> dataToReceive() const override final;
+  std::vector<DataID> implicitDataToReceive() const override final;
 
 private:
   /// Coupling mode used by coupling scheme.

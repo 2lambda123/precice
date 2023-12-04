@@ -221,7 +221,7 @@ public:
     return true;
   }
 
-  std::vector<DataID> dataToReceive() const override final
+  std::vector<DataID> implicitDataToReceive() const override final
   {
     return {};
   }

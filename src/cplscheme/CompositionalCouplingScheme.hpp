@@ -206,7 +206,7 @@ public:
 
   bool requiresSubsteps() const final override;
 
-  std::vector<DataID> dataToReceive() const override final;
+  std::vector<DataID> implicitDataToReceive() const override final;
 
 private:
   mutable logging::Logger _log{"cplscheme::CompositionalCouplingScheme"};

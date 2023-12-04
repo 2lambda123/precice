@@ -376,7 +376,7 @@ void ParticipantImpl::advance(
   // Update the coupling scheme time state. Necessary to get correct remainder.
   const bool   isAtWindowEnd = _couplingScheme->addComputedTime(computedTimeStepSize);
   const double timeSteppedTo = _couplingScheme->getTime();
-  const auto   dataToReceive = _couplingScheme->dataToReceive();
+  const auto   dataToReceive = _couplingScheme->implicitDataToReceive();
 
   handleDataBeforeAdvance(isAtWindowEnd, timeSteppedTo);
 

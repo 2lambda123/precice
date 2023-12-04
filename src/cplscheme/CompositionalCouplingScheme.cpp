@@ -404,16 +404,12 @@ bool CompositionalCouplingScheme::requiresSubsteps() const
   return false;
 }
 
-std::vector<DataID> CompositionalCouplingScheme::dataToReceive() const
+std::vector<DataID> CompositionalCouplingScheme::implicitDataToReceive() const
 {
-  std::vector<DataID> dids;
-  for (auto scheme : _activeSchemes) {
-    const auto toReceive = scheme->dataToReceive();
-    dids.insert(dids.end(), toReceive.begin(), toReceive.end());
+  if (_implicitScheme) {
+    return _implicitScheme->implicitDataToReceive();
   }
-  std::sort(dids.begin(), dids.end());
-  dids.erase(std::unique(dids.begin(), dids.end()), dids.end());
-  return dids;
+  return {};
 }
 
 } // namespace precice::cplscheme

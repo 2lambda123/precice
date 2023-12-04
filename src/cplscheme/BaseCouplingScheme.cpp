@@ -867,8 +867,12 @@ bool BaseCouplingScheme::requiresSubsteps() const
   return false;
 }
 
-std::vector<DataID> BaseCouplingScheme::dataToReceive() const
+std::vector<DataID> BaseCouplingScheme::implicitDataToReceive() const
 {
+  if (!isImplicitCouplingScheme()) {
+    return {};
+  }
+
   std::vector<DataID> dids;
   for (auto cpldata : _allData | boost::adaptors::map_values) {
     if (cpldata->getDirection() == CouplingData::Direction::Receive) {
