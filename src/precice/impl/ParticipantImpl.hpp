@@ -382,7 +382,7 @@ private:
   // Computes, and performs read mappings optionally removes samples in toData after the optional time
   void mapReadData();
 
-  void trimReadMappedData(double timeAfterAdvance, bool isTimeWindowComplete);
+  void trimReadMappedData(double timeAfterAdvance, bool isTimeWindowComplete, std::vector<DataID> fromData);
 
   /**
    * @brief Performs all data actions with given timing.
@@ -425,7 +425,7 @@ private:
   void handleDataBeforeAdvance(bool reachedTimeWindowEnd, double timeSteppedTo);
 
   /// Completes everything data-related after advancing the coupling scheme
-  void handleDataAfterAdvance(bool reachedTimeWindowEnd, bool isTimeWindowComplete, double timeSteppedTo, double timeAfterAdvance);
+  void handleDataAfterAdvance(bool reachedTimeWindowEnd, bool isTimeWindowComplete, double timeSteppedTo, double timeAfterAdvance, std::vector<DataID> receivedData);
 
   /// Creates a Stample at the given time for each write Data and zeros the buffers
   void samplizeWriteData(double time);

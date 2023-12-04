@@ -229,6 +229,8 @@ public:
 
   /// Returns true if any send data of the scheme requires substeps
   virtual bool requiresSubsteps() const = 0;
+
+  virtual std::vector<DataID> dataToReceive() const = 0;
 };
 
 } // namespace cplscheme

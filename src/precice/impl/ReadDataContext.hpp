@@ -63,6 +63,18 @@ public:
   ReadDataContext(ReadDataContext &&) = default;
   ReadDataContext &operator=(ReadDataContext &&) = default;
 
+  /**
+   * @brief Removes all toData samples from mappings
+   */
+  void clearToDataFor(std::vector<DataID> from);
+
+  /**
+   * @brief Trims all toData of associated mappings after the given t
+   *
+   * @param[in] t the time after which to trim data
+   */
+  void trimToDataAfterFor(std::vector<DataID> from, double t);
+
 private:
   static logging::Logger _log;
 };

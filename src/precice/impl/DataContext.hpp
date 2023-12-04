@@ -87,18 +87,6 @@ public:
   int mapData(std::optional<double> after = std::nullopt);
 
   /**
-   * @brief Removes all toData samples from mappings
-   */
-  void clearToData();
-
-  /**
-   * @brief Trims all toData of associated mappings after the given t
-   *
-   * @param[in] t the time after which to trim data
-   */
-  void trimToDataAfter(double t);
-
-  /**
    * @brief Adds a MappingContext and the MeshContext required by the mapping to the corresponding DataContext data structures.
    *
    * A mapping maps the given data from or to _providedData (depending on whether it is a read or write mapping).

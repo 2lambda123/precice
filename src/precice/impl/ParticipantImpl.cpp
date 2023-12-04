@@ -376,6 +376,7 @@ void ParticipantImpl::advance(
   // Update the coupling scheme time state. Necessary to get correct remainder.
   const bool   isAtWindowEnd = _couplingScheme->addComputedTime(computedTimeStepSize);
   const double timeSteppedTo = _couplingScheme->getTime();
+  const auto   dataToReceive = _couplingScheme->dataToReceive();
 
   handleDataBeforeAdvance(isAtWindowEnd, timeSteppedTo);
 
@@ -385,7 +386,7 @@ void ParticipantImpl::advance(
   const double timeAfterAdvance   = _couplingScheme->getTime();
   const bool   timeWindowComplete = _couplingScheme->isTimeWindowComplete();
 
-  handleDataAfterAdvance(isAtWindowEnd, timeWindowComplete, timeSteppedTo, timeAfterAdvance);
+  handleDataAfterAdvance(isAtWindowEnd, timeWindowComplete, timeSteppedTo, timeAfterAdvance, dataToReceive);
 
   PRECICE_INFO(_couplingScheme->printCouplingState());
 
@@ -416,7 +417,7 @@ void ParticipantImpl::handleDataBeforeAdvance(bool reachedTimeWindowEnd, double 
   }
 }
 
-void ParticipantImpl::handleDataAfterAdvance(bool reachedTimeWindowEnd, bool isTimeWindowComplete, double timeSteppedTo, double timeAfterAdvance)
+void ParticipantImpl::handleDataAfterAdvance(bool reachedTimeWindowEnd, bool isTimeWindowComplete, double timeSteppedTo, double timeAfterAdvance, std::vector<DataID> receivedData)
 {
   if (!reachedTimeWindowEnd) {
     // We are subcycling
@@ -437,7 +438,7 @@ void ParticipantImpl::handleDataAfterAdvance(bool reachedTimeWindowEnd, bool isT
   }
 
   if (reachedTimeWindowEnd) {
-    trimReadMappedData(timeAfterAdvance, isTimeWindowComplete);
+    trimReadMappedData(timeAfterAdvance, isTimeWindowComplete, receivedData);
     mapReadData();
     performDataActions({action::Action::READ_MAPPING_POST});
   }
@@ -1406,15 +1407,15 @@ void ParticipantImpl::mapWrittenData(std::optional<double> after)
   }
 }
 
-void ParticipantImpl::trimReadMappedData(double timeAfterAdvance, bool isTimeWindowComplete)
+void ParticipantImpl::trimReadMappedData(double timeAfterAdvance, bool isTimeWindowComplete, std::vector<DataID> fromData)
 {
   PRECICE_TRACE();
   for (auto &context : _accessor->readDataContexts()) {
     if (context.hasMapping()) {
       if (isTimeWindowComplete) {
-        context.clearToData(); // We move on in time and old samples will be removed anyhow
+        context.clearToDataFor(fromData); // We move on in time and old samples will be removed anyhow
       } else {
-        context.trimToDataAfter(timeAfterAdvance);
+        context.trimToDataAfterFor(fromData, timeAfterAdvance);
       }
     }
   }

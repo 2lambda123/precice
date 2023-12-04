@@ -38,4 +38,29 @@ int ReadDataContext::getWaveformDegree() const
   return _providedData->getWaveformDegree();
 }
 
+void ReadDataContext::clearToDataFor(std::vector<DataID> from)
+{
+  PRECICE_TRACE(getMeshName(), getDataName());
+  PRECICE_ASSERT(hasMapping());
+  auto toClean = [&from](DataID did) { return std::find(from.begin(), from.end(), did) != from.end(); };
+  for (auto &context : _mappingContexts) {
+    if (toClean(context.fromData->getID())) {
+      /// The sample() must be overwritte by a following mapping
+      context.toData->timeStepsStorage().clear();
+    }
+  }
+}
+
+void ReadDataContext::trimToDataAfterFor(std::vector<DataID> from, double t)
+{
+  PRECICE_TRACE(getMeshName(), getDataName(), t);
+  PRECICE_ASSERT(hasMapping());
+  auto toClean = [&from](DataID did) { return std::find(from.begin(), from.end(), did) != from.end(); };
+  for (auto &context : _mappingContexts) {
+    if (toClean(context.fromData->getID())) {
+      context.toData->timeStepsStorage().trimAfter(t);
+    }
+  }
+}
+
 } // namespace precice::impl

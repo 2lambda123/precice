@@ -867,4 +867,15 @@ bool BaseCouplingScheme::requiresSubsteps() const
   return false;
 }
 
+std::vector<DataID> BaseCouplingScheme::dataToReceive() const
+{
+  std::vector<DataID> dids;
+  for (auto cpldata : _allData | boost::adaptors::map_values) {
+    if (cpldata->getDirection() == CouplingData::Direction::Receive) {
+      dids.push_back(cpldata->getDataID());
+    }
+  }
+  return dids;
+}
+
 } // namespace precice::cplscheme

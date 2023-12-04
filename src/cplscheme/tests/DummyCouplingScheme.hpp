@@ -221,6 +221,11 @@ public:
     return true;
   }
 
+  std::vector<DataID> dataToReceive() const override final
+  {
+    return {};
+  }
+
 private:
   mutable logging::Logger _log{"cplscheme::tests::DummyCouplingScheme"};
 
