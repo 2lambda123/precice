@@ -87,6 +87,16 @@ bool DataContext::hasMapping() const
   return hasReadMapping() || hasWriteMapping();
 }
 
+void DataContext::clearToData()
+{
+  PRECICE_TRACE(getMeshName(), getDataName());
+  PRECICE_ASSERT(hasMapping());
+  for (auto &context : _mappingContexts) {
+    /// The sample() must be overwritte by a following mapping
+    context.toData->timeStepsStorage().clear();
+  }
+}
+
 void DataContext::trimToDataAfter(double t)
 {
   PRECICE_TRACE(getMeshName(), getDataName(), t);

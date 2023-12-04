@@ -380,7 +380,9 @@ private:
   void mapWrittenData(std::optional<double> after = std::nullopt);
 
   // Computes, and performs read mappings optionally removes samples in toData after the optional time
-  void mapReadData(std::optional<double> after = std::nullopt);
+  void mapReadData();
+
+  void trimReadMappedData(double timeAfterAdvance, bool isTimeWindowComplete);
 
   /**
    * @brief Performs all data actions with given timing.

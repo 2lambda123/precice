@@ -437,7 +437,8 @@ void ParticipantImpl::handleDataAfterAdvance(bool reachedTimeWindowEnd, bool isT
   }
 
   if (reachedTimeWindowEnd) {
-    mapReadData(timeAfterAdvance);
+    trimReadMappedData(timeAfterAdvance, isTimeWindowComplete);
+    mapReadData();
     performDataActions({action::Action::READ_MAPPING_POST});
   }
 
@@ -1405,16 +1406,27 @@ void ParticipantImpl::mapWrittenData(std::optional<double> after)
   }
 }
 
-void ParticipantImpl::mapReadData(std::optional<double> after)
+void ParticipantImpl::trimReadMappedData(double timeAfterAdvance, bool isTimeWindowComplete)
+{
+  PRECICE_TRACE();
+  for (auto &context : _accessor->readDataContexts()) {
+    if (context.hasMapping()) {
+      if (isTimeWindowComplete) {
+        context.clearToData(); // We move on in time and old samples will be removed anyhow
+      } else {
+        context.trimToDataAfter(timeAfterAdvance);
+      }
+    }
+  }
+}
+
+void ParticipantImpl::mapReadData()
 {
   PRECICE_TRACE();
   computeMappings(_accessor->readMappingContexts(), "read");
   for (auto &context : _accessor->readDataContexts()) {
     if (context.hasMapping()) {
       PRECICE_DEBUG("Map read data \"{}\" to mesh \"{}\"", context.getDataName(), context.getMeshName());
-      if (after) {
-        context.trimToDataAfter(*after);
-      }
       // We always ensure that all read data was mapped
       _executedReadMappings += context.mapData();
     }

@@ -87,6 +87,11 @@ public:
   int mapData(std::optional<double> after = std::nullopt);
 
   /**
+   * @brief Removes all toData samples from mappings
+   */
+  void clearToData();
+
+  /**
    * @brief Trims all toData of associated mappings after the given t
    *
    * @param[in] t the time after which to trim data
