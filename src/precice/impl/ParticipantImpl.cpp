@@ -429,14 +429,6 @@ void ParticipantImpl::handleDataAfterAdvance(bool reachedTimeWindowEnd, bool isT
 
     // As we move forward, there may now be old samples lying around
     trimOldDataBefore(_couplingScheme->getTimeWindowStart());
-
-    // Reset initial guesses for iterative mappings
-    for (auto &context : _accessor->readDataContexts()) {
-      context.resetInitialGuesses();
-    }
-    for (auto &context : _accessor->writeDataContexts()) {
-      context.resetInitialGuesses();
-    }
   } else {
     // We are iterating
     PRECICE_ASSERT(math::greater(timeSteppedTo, timeAfterAdvance), "We must have moved back in time!");
@@ -447,6 +439,16 @@ void ParticipantImpl::handleDataAfterAdvance(bool reachedTimeWindowEnd, bool isT
   if (reachedTimeWindowEnd) {
     mapReadData(timeAfterAdvance);
     performDataActions({action::Action::READ_MAPPING_POST});
+  }
+
+  if (isTimeWindowComplete) {
+    // Reset initial guesses for iterative mappings
+    for (auto &context : _accessor->readDataContexts()) {
+      context.resetInitialGuesses();
+    }
+    for (auto &context : _accessor->writeDataContexts()) {
+      context.resetInitialGuesses();
+    }
   }
 
   handleExports();
