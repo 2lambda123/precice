@@ -16,9 +16,9 @@ BOOST_AUTO_TEST_CASE(SerialImplicit)
 {
   PRECICE_TEST("One"_on(1_rank), "Two"_on(1_rank));
 
-  // 1: we fail to converge and receive a new sample for the end of the time window
-  // 0: we don't receive anything in the last step as second
-  std::vector<int> readMappings{1, 1, 1, 1, 1, 0};
+  // 1: iterating: new end
+  // 2: converged: new start and end
+  std::vector<int> readMappings{1, 2, 1, 2, 1, 1};
   // 2: we map the samples from the two time steps
   std::vector<int> writeMappings{2, 2, 2, 2, 2, 2};
 

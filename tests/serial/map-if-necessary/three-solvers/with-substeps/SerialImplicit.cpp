@@ -16,7 +16,15 @@ BOOST_AUTO_TEST_CASE(SerialImplicit)
 {
   PRECICE_TEST("A"_on(1_rank), "B"_on(1_rank), "C"_on(1_rank));
 
-  std::vector<int> readMappings{4, 3, 4, 3, 3, 0};
+  std::vector<int> readMappings{
+      // initialize not checked (tw0 of A)
+      3, // iterating: end from A (tw1) and mid + end from B
+      3, // start + mid + end from B
+      3, // iterating: final end from A (tw2) and mid + end from B
+      3, // start + mid + end from B
+      2, // iterating: mid + end from B
+      1  // final mid + end from B
+  };
   std::vector<int> writeMappings{4, 4, 4, 4, 4, 4};
 
   runMultipleSolversMappingCount(context, readMappings, writeMappings);

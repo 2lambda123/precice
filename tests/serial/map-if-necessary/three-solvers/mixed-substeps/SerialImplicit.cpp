@@ -15,8 +15,19 @@ BOOST_AUTO_TEST_SUITE(MixedSubsteps)
 BOOST_AUTO_TEST_CASE(SerialImplicit)
 {
   PRECICE_TEST("A"_on(1_rank), "B"_on(1_rank), "C"_on(1_rank));
-
-  std::vector<int> readMappings{4, 3, 4, 3, 3, 0};
+  // new data from A = new end
+  // iterating B = new mid + new end
+  // new tw B = new start + mid + end
+  std::vector<int> readMappings{
+      // initialize is not checked (should be start + mid + end from B and start + end from A (tw0))
+      3, // iterating B + new data from A (tw1)
+      3, // next tw
+      3, // iterating B + final data from A (tw2)
+      3, // next tw
+      2, // iterating B
+      1  // final data from B
+  };
+  // always maps mid + end per data
   std::vector<int> writeMappings{4, 4, 4, 4, 4, 4};
 
   runMultipleSolversMappingCount(context, readMappings, writeMappings);

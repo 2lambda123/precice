@@ -16,7 +16,9 @@ BOOST_AUTO_TEST_CASE(Multi)
 {
   PRECICE_TEST("A"_on(1_rank), "B"_on(1_rank), "C"_on(1_rank));
 
-  std::vector<int> readMappings{3, 0, 3, 0, 3, 0};
+  // 3: new start + mid + end samples
+  // 2: multi & parallel implicit only exchange end samples on convergence
+  std::vector<int> readMappings{3, 2, 3, 2, 3, 2};
   std::vector<int> writeMappings{4, 4, 4, 4, 4, 4};
 
   runMultipleSolversMappingCount(context, readMappings, writeMappings);

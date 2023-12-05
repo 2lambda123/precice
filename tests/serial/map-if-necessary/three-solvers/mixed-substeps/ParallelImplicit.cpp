@@ -16,7 +16,7 @@ BOOST_AUTO_TEST_CASE(ParallelImplicit)
 {
   PRECICE_TEST("A"_on(1_rank), "B"_on(1_rank), "C"_on(1_rank));
 
-  std::vector<int> readMappings{3, 0, 3, 0, 3, 0};
+  std::vector<int> readMappings{3, 1, 3, 1, 3, 1};
   // When the coupling scheme A - B moves on to the next time window, C discards samples in the send data
   // namely MeshA:DataC.
   // While the itererative scheme is iterating, it still has this beginning timestamp and will be mapped in the writeMapping

@@ -18,7 +18,7 @@ BOOST_AUTO_TEST_CASE(ParallelImplicit)
 
   // 1: we fail to converge and receive a new sample for the end of the time window
   // 0: we succeed to converge and keep the sample of the end of the time window
-  std::vector<int> readMappings{1, 0, 1, 0, 1, 0};
+  std::vector<int> readMappings{1, 1, 1, 1, 1, 1};
   // 1: we only map the samples from end of the time window
   std::vector<int> writeMappings{1, 1, 1, 1, 1, 1};
 
