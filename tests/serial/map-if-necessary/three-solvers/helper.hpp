@@ -7,7 +7,7 @@
 
 // Coupling is A - C - B, which can be MultiCoupling or Compositional. A-C may be explicitly coupled.
 // A and B always go first.
-// A never sends substeps, B always sends substeps, which should be reflected in the read mappings of C.
+// A never sends substeps, B always sends substeps except in Multi Coupling, which should be reflected in the read mappings of C.
 // The tests choose various scenarios for C to send and receive substeps.
 // Checkpoints are ignored for the sake of simplicity and time window sizes are considered to be equal
 
