@@ -134,15 +134,6 @@ void Storage::trimAfter(double time)
   _bspline.reset();
 }
 
-void Storage::trimAfterIncluding(double time)
-{
-  auto toRemove = [time](const auto &s) { return math::greaterEquals(s.timestamp, time); };
-  _stampleStorage.erase(std::remove_if(_stampleStorage.begin(), _stampleStorage.end(), toRemove), _stampleStorage.end());
-
-  // The spline has to be recomputed, since the underlying data has changed
-  _bspline.reset();
-}
-
 Sample Storage::getSampleAtOrAfter(double before) const
 {
   PRECICE_TRACE(before);

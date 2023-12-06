@@ -126,8 +126,6 @@ public:
 
   void trimAfter(double time);
 
-  void trimAfterIncluding(double time);
-
   /**
    * @brief Need to use interpolation for the case with changing time grids
    *
