@@ -396,8 +396,10 @@ protected:
    */
   bool reachedEndOfTimeWindow() const;
 
+  /// @copydoc cplscheme::CouplingScheme::requiresSubsteps()
   bool requiresSubsteps() const override final;
 
+  /// @copydoc cplscheme::CouplingScheme::implicitDataToReceive()
   std::vector<DataID> implicitDataToReceive() const override final;
 
 private:

@@ -204,8 +204,10 @@ public:
   /// True if the implicit scheme has converged or no implicit scheme is defined
   bool hasConverged() const final;
 
-  bool requiresSubsteps() const final override;
+  /// @copydoc cplscheme::CouplingScheme::requiresSubsteps()
+  bool requiresSubsteps() const override final;
 
+  /// @copydoc cplscheme::CouplingScheme::implicitDataToReceive()
   std::vector<DataID> implicitDataToReceive() const override final;
 
 private:
