@@ -379,9 +379,14 @@ private:
   /// Computes, and performs suitable write mappings either entirely or after given time
   void mapWrittenData(std::optional<double> after = std::nullopt);
 
-  // Computes, and performs read mappings optionally removes samples in toData after the optional time
+  // Computes, and performs read mappings
   void mapReadData();
 
+  /**
+   * @brief Removes samples in mapped to data connected to received data via a mapping.
+   *
+   * This prevents old samples from blocking remappings.
+   */
   void trimReadMappedData(double timeAfterAdvance, bool isTimeWindowComplete, std::vector<DataID> fromData);
 
   /**
