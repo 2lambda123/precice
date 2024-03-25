@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_CASE(WaveformSubcyclingWithDifferentNumberOfDts)
     time += currentDt;
     if (iterations == 0) { // Sends the first function in the first iteration
       writeData = funcIterOne(time);
-    } else { //Otherwise send the second function
+    } else { // Otherwise send the second function
       writeData = funcIterTwo(time);
     }
 

@@ -48,10 +48,10 @@ struct ProjectionMatch {
   ProjectionMatch(mapping::Polation &&p)
       : polation(std::move(p)) {}
 
-  ProjectionMatch(const ProjectionMatch &other) = default;
-  ProjectionMatch(ProjectionMatch &&other)      = default;
+  ProjectionMatch(const ProjectionMatch &other)            = default;
+  ProjectionMatch(ProjectionMatch &&other)                 = default;
   ProjectionMatch &operator=(const ProjectionMatch &other) = default;
-  ProjectionMatch &operator=(ProjectionMatch &&other) = default;
+  ProjectionMatch &operator=(ProjectionMatch &&other)      = default;
 
   mapping::Polation polation;
 

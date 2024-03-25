@@ -183,7 +183,7 @@ void tagDuplicateCenters(Vertices &centers, std::array<unsigned int, 3> nCells, 
   auto neighborOffsets = zCurveNeighborOffsets<dim>(nCells);
   static_assert((neighborOffsets.size() == 8 && dim == 2) || (neighborOffsets.size() == 26 && dim == 3));
 
-  //For the following to work, the vertexID has to correspond to the position in the centers
+  // For the following to work, the vertexID has to correspond to the position in the centers
   PRECICE_ASSERT(std::all_of(centers.begin(), centers.end(), [idx = 0](auto &v) mutable { return v.getID() == idx++; }));
   // we check all neighbors
   for (auto &v : centers) {

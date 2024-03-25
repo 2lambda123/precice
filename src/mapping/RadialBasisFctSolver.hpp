@@ -33,7 +33,7 @@ public:
    * for consistent mappings and the output mesh for conservative mappings
    * outputMesh refers to the mesh where we evaluate the interpolants, i.e., the output mesh
    * consistent mappings and the input mesh for conservative mappings
-  */
+   */
   template <typename IndexContainer>
   RadialBasisFctSolver(RADIAL_BASIS_FUNCTION_T basisFunction, const mesh::Mesh &inputMesh, const IndexContainer &inputIDs,
                        const mesh::Mesh &outputMesh, const IndexContainer &outputIDs, std::vector<bool> deadAxis, Polynomial polynomial);
@@ -78,7 +78,7 @@ private:
 inline double computeSquaredDifference(
     const std::array<double, 3> &u,
     std::array<double, 3>        v,
-    const std::array<bool, 3> &  activeAxis = {{true, true, true}})
+    const std::array<bool, 3>   &activeAxis = {{true, true, true}})
 {
   // Subtract the values and multiply out dead dimensions
   for (unsigned int d = 0; d < v.size(); ++d) {
@@ -123,7 +123,7 @@ inline void fillPolynomialEntries(Eigen::MatrixXd &matrix, const mesh::Mesh &mes
     matrix(i.index(), startIndex) = 1.0;
 
     // 2. the linear contribution
-    const auto & u = mesh.vertices()[i.value()].rawCoords();
+    const auto  &u = mesh.vertices()[i.value()].rawCoords();
     unsigned int k = 0;
     // Loop over all three space dimension and ignore dead axis
     for (unsigned int d = 0; d < activeAxis.size(); ++d) {

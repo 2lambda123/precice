@@ -200,7 +200,7 @@ void EventRegistry::put(PendingEntry pe)
 
 namespace {
 struct EventWriter {
-  std::ostream &           out;
+  std::ostream            &out;
   Event::Clock::time_point initClock;
   std::string              prefix;
 

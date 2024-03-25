@@ -18,7 +18,7 @@
 #include "utils/IntraComm.hpp"
 #include "utils/assertion.hpp"
 
-//#include "utils/NumericalCompare.hpp"
+// #include "utils/NumericalCompare.hpp"
 
 using precice::cplscheme::PtrCouplingData;
 
@@ -109,7 +109,7 @@ void IQNILSAcceleration::updateDifferenceMatrices(
 void IQNILSAcceleration::computeUnderrelaxationSecondaryData(
     const DataMap &cplData)
 {
-  //Store x_tildes for secondary data
+  // Store x_tildes for secondary data
   for (int id : _secondaryDataIDs) {
     PRECICE_ASSERT(_secondaryOldXTildes.at(id).size() == cplData.at(id)->getSize(),
                    _secondaryOldXTildes.at(id).size(), cplData.at(id)->getSize());
@@ -196,8 +196,8 @@ void IQNILSAcceleration::computeQNUpdate(const DataMap &cplData, Eigen::VectorXd
   xUpdate = _matrixW * c;
 
   /**
-     *  perform QN-Update step for the secondary Data
-     */
+   *  perform QN-Update step for the secondary Data
+   */
 
   // If the previous time window converged within one single iteration, nothing was added
   // to the LS system matrices and they need to be restored from the backup at time T-2
@@ -209,7 +209,7 @@ void IQNILSAcceleration::computeQNUpdate(const DataMap &cplData, Eigen::VectorXd
   // Perform QN relaxation for secondary data
   for (int id : _secondaryDataIDs) {
     PtrCouplingData data   = cplData.at(id);
-    auto &          values = data->values();
+    auto           &values = data->values();
     PRECICE_ASSERT(_secondaryMatricesW[id].cols() == c.size(), _secondaryMatricesW[id].cols(), c.size());
     values = _secondaryMatricesW[id] * c;
     PRECICE_ASSERT(data->getSize() == data->getPreviousIterationSize(), data->getSize(), data->getPreviousIterationSize());

@@ -195,7 +195,7 @@ template <typename VALUE_T>
 typename std::enable_if<
     std::is_same<VALUE_T, ATTRIBUTE_T>::value && not std::is_same<VALUE_T, Eigen::VectorXd>::value, void>::type
 XMLAttribute<ATTRIBUTE_T>::set(
-    ATTRIBUTE_T &  toSet,
+    ATTRIBUTE_T   &toSet,
     const VALUE_T &setter)
 {
   toSet = setter;
@@ -206,7 +206,7 @@ template <typename VALUE_T>
 typename std::enable_if<
     std::is_same<VALUE_T, ATTRIBUTE_T>::value && std::is_same<VALUE_T, Eigen::VectorXd>::value, void>::type
 XMLAttribute<ATTRIBUTE_T>::set(
-    ATTRIBUTE_T &  toSet,
+    ATTRIBUTE_T   &toSet,
     const VALUE_T &setter)
 {
   toSet = setter;

@@ -131,7 +131,7 @@ public:
    *
    * @param time a double, where we want to sample the waveform
    * @return Eigen::VectorXd values in this Storage at or directly after "before"
-  */
+   */
   Eigen::VectorXd sample(double time) const;
 
   Eigen::MatrixXd sampleGradients(double time) const;

@@ -48,7 +48,7 @@ void create_rbf_system_matrix(std::shared_ptr<const DefaultExecutor> exec,
           dist += pow_int<2>(supportPoints[supportPointOffset + k] - targetPoints[targetPointOffset + k]) * static_cast<int>(activeAxis.at(k));
         }
 
-        dist                                  = std::sqrt(dist);
+        dist = std::sqrt(dist);
 #endif
 
         mtx[i * rowLength + j] = f(dist, rbf_params);

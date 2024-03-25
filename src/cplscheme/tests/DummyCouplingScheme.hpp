@@ -29,7 +29,7 @@ public:
   /**
    * @brief Destructor, empty.
    */
-  //virtual ~DummyCouplingScheme() {}
+  // virtual ~DummyCouplingScheme() {}
 
   /**
    * @brief
@@ -68,7 +68,7 @@ public:
   /**
    * @brief
    */
-  //void advance() override final;
+  // void advance() override final;
 
   ChangedMeshes firstSynchronization(const ChangedMeshes &changes) override;
 

@@ -249,7 +249,7 @@ void Parallel::finalizeOrCleanupMPI()
 }
 
 void Parallel::initializeTestingMPI(
-    int *   argc,
+    int    *argc,
     char ***argv)
 {
 #ifndef PRECICE_NO_MPI
@@ -486,4 +486,4 @@ std::ostream &operator<<(std::ostream &out, const Parallel::CommState &value)
 
 } // namespace precice::utils
 
-//#endif // not PRECICE_NO_MPI
+// #endif // not PRECICE_NO_MPI

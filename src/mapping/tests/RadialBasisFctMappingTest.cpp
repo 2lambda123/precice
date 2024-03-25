@@ -96,7 +96,7 @@ mesh::PtrMesh getDistributedMesh(const TestContext &context,
   return distributedMesh;
 }
 
-Eigen::VectorXd getDistributedData(const TestContext &      context,
+Eigen::VectorXd getDistributedData(const TestContext       &context,
                                    MeshSpecification const &meshSpec)
 {
   Eigen::VectorXd d;
@@ -116,8 +116,8 @@ Eigen::VectorXd getDistributedData(const TestContext &      context,
   return d;
 }
 
-void testDistributed(const TestContext &    context,
-                     Mapping &              mapping,
+void testDistributed(const TestContext     &context,
+                     Mapping               &mapping,
                      MeshSpecification      inMeshSpec,
                      MeshSpecification      outMeshSpec,
                      ReferenceSpecification referenceSpec,
@@ -494,14 +494,14 @@ BOOST_AUTO_TEST_CASE(DistributedConsistent2DV4)
       meshDims2D,
       "outMesh"};
   ReferenceSpecification                                        ref{{1, {5}},
-                             {1, {3}},
-                             {1, {2.5}},
-                             {1, {4}},
-                             {1, {1.1}},
-                             {2, {5}},
-                             {2, {6}},
-                             {2, {7}},
-                             {2, {8}}};
+                                                                    {1, {3}},
+                                                                    {1, {2.5}},
+                                                                    {1, {4}},
+                                                                    {1, {1.1}},
+                                                                    {2, {5}},
+                                                                    {2, {6}},
+                                                                    {2, {7}},
+                                                                    {2, {8}}};
   RadialBasisFctMapping<RadialBasisFctSolver<ThinPlateSplines>> mapping_on(Mapping::CONSISTENT, 2, fct, {{false, false, false}}, Polynomial::ON);
   testDistributed(context, mapping_on, in, out, ref, globalIndexOffsets.at(context.rank));
   RadialBasisFctMapping<RadialBasisFctSolver<ThinPlateSplines>> mapping_sep(Mapping::CONSISTENT, 2, fct, {{false, false, false}}, Polynomial::SEPARATE);
@@ -572,14 +572,14 @@ BOOST_AUTO_TEST_CASE(DistributedConsistent2DV5)
       meshDims2D,
       "outMesh"};
   ReferenceSpecification                                        ref{{1, {5}},
-                             {1, {3}},
-                             {1, {2.5}},
-                             {1, {4}},
-                             {1, {1.1}},
-                             {2, {5}},
-                             {2, {6}},
-                             {2, {7}},
-                             {2, {8}}};
+                                                                    {1, {3}},
+                                                                    {1, {2.5}},
+                                                                    {1, {4}},
+                                                                    {1, {1.1}},
+                                                                    {2, {5}},
+                                                                    {2, {6}},
+                                                                    {2, {7}},
+                                                                    {2, {8}}};
   RadialBasisFctMapping<RadialBasisFctSolver<ThinPlateSplines>> mapping_on(Mapping::CONSISTENT, 2, fct, {{false, false, false}}, Polynomial::ON);
   testDistributed(context, mapping_on, in, out, ref, globalIndexOffsets.at(context.rank));
   RadialBasisFctMapping<RadialBasisFctSolver<ThinPlateSplines>> mapping_sep(Mapping::CONSISTENT, 2, fct, {{false, false, false}}, Polynomial::SEPARATE);
@@ -638,14 +638,14 @@ BOOST_AUTO_TEST_CASE(DistributedConsistent2DV6,
       meshDims2D,
       "outMesh"};
   ReferenceSpecification                                        ref{{1, {5}},
-                             {1, {3}},
-                             {1, {2}},
-                             {1, {4}},
-                             {1, {1}},
-                             {2, {5}},
-                             {2, {6}},
-                             {2, {7}},
-                             {2, {8}}};
+                                                                    {1, {3}},
+                                                                    {1, {2}},
+                                                                    {1, {4}},
+                                                                    {1, {1}},
+                                                                    {2, {5}},
+                                                                    {2, {6}},
+                                                                    {2, {7}},
+                                                                    {2, {8}}};
   RadialBasisFctMapping<RadialBasisFctSolver<ThinPlateSplines>> mapping_on(Mapping::CONSISTENT, 2, fct, {{false, false, false}}, Polynomial::ON);
   testDistributed(context, mapping_on, in, out, ref, globalIndexOffsets.at(context.rank));
   RadialBasisFctMapping<RadialBasisFctSolver<ThinPlateSplines>> mapping_sep(Mapping::CONSISTENT, 2, fct, {{false, false, false}}, Polynomial::SEPARATE);
@@ -1196,7 +1196,7 @@ void testTagging(const TestContext &context,
 
   for (const auto &v : inMesh->vertices()) {
     auto pos   = std::find_if(shouldTagFirstRound.vertices.begin(), shouldTagFirstRound.vertices.end(),
-                            [meshDimension, &v](const VertexSpecification &spec) {
+                              [meshDimension, &v](const VertexSpecification &spec) {
                               return std::equal(spec.position.data(), spec.position.data() + meshDimension, v.getCoords().data());
                             });
     bool found = pos != shouldTagFirstRound.vertices.end();
@@ -1210,12 +1210,12 @@ void testTagging(const TestContext &context,
 
   for (const auto &v : inMesh->vertices()) {
     auto posFirst    = std::find_if(shouldTagFirstRound.vertices.begin(), shouldTagFirstRound.vertices.end(),
-                                 [meshDimension, &v](const VertexSpecification &spec) {
+                                    [meshDimension, &v](const VertexSpecification &spec) {
                                    return std::equal(spec.position.data(), spec.position.data() + meshDimension, v.getCoords().data());
                                  });
     bool foundFirst  = posFirst != shouldTagFirstRound.vertices.end();
     auto posSecond   = std::find_if(shouldTagSecondRound.vertices.begin(), shouldTagSecondRound.vertices.end(),
-                                  [meshDimension, &v](const VertexSpecification &spec) {
+                                    [meshDimension, &v](const VertexSpecification &spec) {
                                     return std::equal(spec.position.data(), spec.position.data() + meshDimension, v.getCoords().data());
                                   });
     bool foundSecond = posSecond != shouldTagSecondRound.vertices.end();
