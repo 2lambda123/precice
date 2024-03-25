@@ -30,7 +30,7 @@ void precicec_createParticipant_withCommunicator(
     const char *configFileName,
     int         solverProcessIndex,
     int         solverProcessSize,
-    void *      communicator)
+    void       *communicator)
 {
   PRECICE_CHECK(impl == nullptr, errormsgCreate);
   impl.reset(new precice::Participant(participantName,
@@ -135,7 +135,7 @@ int precicec_requiresMeshConnectivityFor(const char *meshName)
 }
 
 int precicec_setMeshVertex(
-    const char *  meshName,
+    const char   *meshName,
     const double *position)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -144,10 +144,10 @@ int precicec_setMeshVertex(
 }
 
 void precicec_setMeshVertices(
-    const char *  meshName,
+    const char   *meshName,
     int           size,
     const double *positions,
-    int *         ids)
+    int          *ids)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
   auto idsSize = static_cast<long unsigned>(size);
@@ -174,7 +174,7 @@ void precicec_setMeshEdge(
 void precicec_setMeshEdges(
     const char *meshName,
     int         size,
-    const int * vertices)
+    const int  *vertices)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
   auto verticesSize = static_cast<long unsigned>(size) * 2;
@@ -194,7 +194,7 @@ void precicec_setMeshTriangle(
 void precicec_setMeshTriangles(
     const char *meshName,
     int         size,
-    const int * vertices)
+    const int  *vertices)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
   auto verticesSize = static_cast<long unsigned>(size) * 3;
@@ -215,7 +215,7 @@ void precicec_setMeshQuad(
 void precicec_setMeshQuads(
     const char *meshName,
     int         size,
-    const int * vertices)
+    const int  *vertices)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
   auto verticesSize = static_cast<long unsigned>(size) * 4;
@@ -236,7 +236,7 @@ void precicec_setMeshTetrahedron(
 void precicec_setMeshTetrahedra(
     const char *meshName,
     int         size,
-    const int * vertices)
+    const int  *vertices)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
   auto verticesSize = static_cast<long unsigned>(size) * 4;
@@ -244,10 +244,10 @@ void precicec_setMeshTetrahedra(
 }
 
 void precicec_writeData(
-    const char *  meshName,
-    const char *  dataName,
+    const char   *meshName,
+    const char   *dataName,
     int           size,
-    const int *   valueIndices,
+    const int    *valueIndices,
     const double *values)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -259,9 +259,9 @@ void precicec_readData(
     const char *meshName,
     const char *dataName,
     int         size,
-    const int * valueIndices,
+    const int  *valueIndices,
     double      relativeReadTime,
-    double *    values)
+    double     *values)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
   auto dataSize = size * impl->getDataDimensions(meshName, dataName);
@@ -279,10 +279,10 @@ int precicec_requiresGradientDataFor(const char *meshName,
 }
 
 void precicec_writeGradientData(
-    const char *  meshName,
-    const char *  dataName,
+    const char   *meshName,
+    const char   *dataName,
     int           size,
-    const int *   valueIndices,
+    const int    *valueIndices,
     const double *gradients)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -297,7 +297,7 @@ const char *precicec_getVersionInformation()
 }
 
 void precicec_setMeshAccessRegion(
-    const char *  meshName,
+    const char   *meshName,
     const double *boundingBox)
 {
   auto bbSize = static_cast<long unsigned>(impl->getMeshDimensions(meshName)) * 2;
@@ -307,8 +307,8 @@ void precicec_setMeshAccessRegion(
 void precicec_getMeshVertexIDsAndCoordinates(
     const char *meshName,
     const int   size,
-    int *       ids,
-    double *    coordinates)
+    int        *ids,
+    double     *coordinates)
 {
   auto coordinatesSize = static_cast<long unsigned>(impl->getMeshDimensions(meshName) * size);
   impl->getMeshVertexIDsAndCoordinates(meshName, {ids, static_cast<unsigned long>(size)}, {coordinates, coordinatesSize});

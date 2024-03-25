@@ -41,8 +41,8 @@ std::string_view strippedStringView(const char *string, int length);
 void precicef_create_(
     const char *participantName,
     const char *configFileName,
-    const int * solverProcessIndex,
-    const int * solverProcessSize,
+    const int  *solverProcessIndex,
+    const int  *solverProcessSize,
     int         participantNameLength,
     int         configFileNameLength)
 {
@@ -75,7 +75,7 @@ void precicef_finalize_()
 
 void precicef_get_mesh_dimensions_(
     const char *meshName,
-    int *       dimensions,
+    int        *dimensions,
     int         meshNameLength)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -85,7 +85,7 @@ void precicef_get_mesh_dimensions_(
 void precicef_get_data_dimensions_(
     const char *meshName,
     const char *dataName,
-    int *       dimensions,
+    int        *dimensions,
     int         meshNameLength,
     int         dataNameLength)
 {
@@ -145,7 +145,7 @@ void precicef_requires_reading_checkpoint_(
 
 void precicef_requires_mesh_connectivity_for_(
     const char *meshName,
-    int *       required,
+    int        *required,
     int         meshNameLength)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -157,9 +157,9 @@ void precicef_requires_mesh_connectivity_for_(
 }
 
 void precicef_set_vertex_(
-    const char *  meshName,
+    const char   *meshName,
     const double *position,
-    int *         vertexID,
+    int          *vertexID,
     int           meshNameLength)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -170,7 +170,7 @@ void precicef_set_vertex_(
 
 void precicef_get_mesh_vertex_size_(
     const char *meshName,
-    int *       meshSize,
+    int        *meshSize,
     int         meshNameLength)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -179,9 +179,9 @@ void precicef_get_mesh_vertex_size_(
 
 void precicef_set_vertices_(
     const char *meshName,
-    const int * size,
-    double *    positions,
-    int *       positionIDs,
+    const int  *size,
+    double     *positions,
+    int        *positionIDs,
     int         meshNameLength)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -192,8 +192,8 @@ void precicef_set_vertices_(
 
 void precicef_set_edge_(
     const char *meshName,
-    const int * firstVertexID,
-    const int * secondVertexID,
+    const int  *firstVertexID,
+    const int  *secondVertexID,
     int         meshNameLength)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -202,8 +202,8 @@ void precicef_set_edge_(
 
 void precicef_set_mesh_edges_(
     const char *meshName,
-    const int * size,
-    const int * vertices,
+    const int  *size,
+    const int  *vertices,
     int         meshNameLength)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -213,9 +213,9 @@ void precicef_set_mesh_edges_(
 
 void precicef_set_triangle_(
     const char *meshName,
-    const int * firstVertexID,
-    const int * secondVertexID,
-    const int * thirdVertexID,
+    const int  *firstVertexID,
+    const int  *secondVertexID,
+    const int  *thirdVertexID,
     int         meshNameLength)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -224,8 +224,8 @@ void precicef_set_triangle_(
 
 void precicef_set_mesh_triangles_(
     const char *meshName,
-    const int * size,
-    const int * vertices,
+    const int  *size,
+    const int  *vertices,
     int         meshNameLength)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -235,10 +235,10 @@ void precicef_set_mesh_triangles_(
 
 void precicef_set_quad_(
     const char *meshName,
-    const int * firstVertexID,
-    const int * secondVertexID,
-    const int * thirdVertexID,
-    const int * fourthVertexID,
+    const int  *firstVertexID,
+    const int  *secondVertexID,
+    const int  *thirdVertexID,
+    const int  *fourthVertexID,
     int         meshNameLength)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -247,8 +247,8 @@ void precicef_set_quad_(
 
 void precicef_set_mesh_quads_(
     const char *meshName,
-    const int * size,
-    const int * vertices,
+    const int  *size,
+    const int  *vertices,
     int         meshNameLength)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -258,10 +258,10 @@ void precicef_set_mesh_quads_(
 
 void precicef_set_tetrahedron(
     const char *meshName,
-    const int * firstVertexID,
-    const int * secondVertexID,
-    const int * thirdVertexID,
-    const int * fourthVertexID,
+    const int  *firstVertexID,
+    const int  *secondVertexID,
+    const int  *thirdVertexID,
+    const int  *fourthVertexID,
     int         meshNameLength)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -270,8 +270,8 @@ void precicef_set_tetrahedron(
 
 void precicef_set_mesh_tetrahedra_(
     const char *meshName,
-    const int * size,
-    const int * vertices,
+    const int  *size,
+    const int  *vertices,
     int         meshNameLength)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);
@@ -282,9 +282,9 @@ void precicef_set_mesh_tetrahedra_(
 void precicef_write_data_(
     const char *meshName,
     const char *dataName,
-    const int * size,
-    int *       valueIndices,
-    double *    values,
+    const int  *size,
+    int        *valueIndices,
+    double     *values,
     int         meshNameLength,
     int         dataNameLength)
 {
@@ -299,12 +299,12 @@ void precicef_write_data_(
 }
 
 void precicef_read_data_(
-    const char *  meshName,
-    const char *  dataName,
-    const int *   size,
-    int *         valueIndices,
+    const char   *meshName,
+    const char   *dataName,
+    const int    *size,
+    int          *valueIndices,
     const double *relativeReadTime,
-    double *      values,
+    double       *values,
     int           meshNameLength,
     int           dataNameLength)
 {
@@ -362,10 +362,10 @@ void precicef_requires_gradient_data_for_(
 }
 
 void precicef_write_gradient_data_(
-    const char *  meshName,
-    const char *  dataName,
-    const int *   size,
-    const int *   valueIndices,
+    const char   *meshName,
+    const char   *dataName,
+    const int    *size,
+    const int    *valueIndices,
     const double *gradients,
     int           meshNameLength,
     int           dataNameLength)
@@ -383,7 +383,7 @@ void precicef_write_gradient_data_(
 }
 
 void precicef_set_mesh_access_region_(
-    const char *  meshName,
+    const char   *meshName,
     const double *boundingBox,
     int           meshNameLength)
 {
@@ -396,8 +396,8 @@ void precicef_set_mesh_access_region_(
 void precicef_get_mesh_vertices_and_ids_(
     const char *meshName,
     const int   size,
-    int *       ids,
-    double *    coordinates,
+    int        *ids,
+    double     *coordinates,
     int         meshNameLength)
 {
   PRECICE_CHECK(impl != nullptr, errormsg);

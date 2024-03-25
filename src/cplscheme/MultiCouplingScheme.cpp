@@ -23,10 +23,10 @@ MultiCouplingScheme::MultiCouplingScheme(
     double                             maxTime,
     int                                maxTimeWindows,
     double                             timeWindowSize,
-    const std::string &                localParticipant,
+    const std::string                 &localParticipant,
     std::map<std::string, m2n::PtrM2N> m2ns,
     constants::TimesteppingMethod      dtMethod,
-    const std::string &                controller,
+    const std::string                 &controller,
     int                                minIterations,
     int                                maxIterations)
     : BaseCouplingScheme(maxTime, maxTimeWindows, timeWindowSize, localParticipant, minIterations, maxIterations, Implicit, dtMethod),
@@ -170,7 +170,7 @@ void MultiCouplingScheme::addDataToSend(
     mesh::PtrMesh        mesh,
     bool                 requiresInitialization,
     bool                 exchangeSubsteps,
-    const std::string &  to)
+    const std::string   &to)
 {
   PtrCouplingData ptrCplData = addCouplingData(data, std::move(mesh), requiresInitialization, exchangeSubsteps, CouplingData::Direction::Send);
   PRECICE_DEBUG("Configuring send data to {}", to);
@@ -182,7 +182,7 @@ void MultiCouplingScheme::addDataToReceive(
     mesh::PtrMesh        mesh,
     bool                 requiresInitialization,
     bool                 exchangeSubsteps,
-    const std::string &  from)
+    const std::string   &from)
 {
   PtrCouplingData ptrCplData = addCouplingData(data, std::move(mesh), requiresInitialization, exchangeSubsteps, CouplingData::Direction::Receive);
   PRECICE_DEBUG("Configuring receive data from {}", from);

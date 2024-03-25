@@ -87,7 +87,7 @@ void Petsc::initialize(Parallel::Communicator comm)
     PetscOptionsSetValue(nullptr, "-no_signal_handler", nullptr);
     PetscErrorCode ierr;
     int            argc = 0;
-    char **        argv = nullptr;
+    char         **argv = nullptr;
     ierr                = PetscInitialize(&argc, &argv, "", nullptr);
     CHKERRV(ierr);
     weInitialized = true;
@@ -329,7 +329,7 @@ void Vector::setValue(PetscInt row, PetscScalar value)
 void Vector::arange(double start, double stop)
 {
   PetscErrorCode ierr = 0;
-  PetscScalar *  a;
+  PetscScalar   *a;
   PetscInt       range_start, range_end, size;
   VecGetSize(vector, &size);
   VecGetOwnershipRange(vector, &range_start, &range_end);
@@ -366,7 +366,7 @@ Vector &Vector::copyFrom(precice::span<const double> source)
     return *this;
   }
   PRECICE_ASSERT(static_cast<PetscInt>(source.size()) == getLocalSize());
-  PetscScalar *  data;
+  PetscScalar   *data;
   PetscErrorCode ierr = 0;
   ierr                = VecGetArray(vector, &data);
   PRECICE_ASSERT(ierr == 0);
@@ -384,7 +384,7 @@ Vector &Vector::copyTo(precice::span<double> destination)
   }
   auto localSize = getLocalSize();
   PRECICE_ASSERT(static_cast<PetscInt>(destination.size()) == localSize);
-  PetscScalar *  data;
+  PetscScalar   *data;
   PetscErrorCode ierr = 0;
   ierr                = VecGetArray(vector, &data);
   PRECICE_ASSERT(ierr == 0);
@@ -399,7 +399,7 @@ void Vector::sort()
 {
   PetscErrorCode ierr = 0;
   PetscInt       size;
-  PetscReal *    a;
+  PetscReal     *a;
   ierr = VecGetArray(vector, &a);
   CHKERRV(ierr);
   ierr = VecGetSize(vector, &size);

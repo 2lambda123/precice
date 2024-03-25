@@ -10,10 +10,10 @@ int main(int argc, char **argv)
   int         solverProcessIndex = 0;
   int         solverProcessSize  = 1;
   int         dimensions         = -1;
-  double *    vertices;
-  double *    readData;
-  double *    writeData;
-  int *       vertexIDs;
+  double     *vertices;
+  double     *readData;
+  double     *writeData;
+  int        *vertexIDs;
   int         numberOfVertices = 3;
   int         writeDataID      = -1;
   int         readDataID       = -1;

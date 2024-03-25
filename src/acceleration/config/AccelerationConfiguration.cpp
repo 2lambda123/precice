@@ -130,7 +130,7 @@ PtrAcceleration AccelerationConfiguration::getAcceleration()
 
 void AccelerationConfiguration::xmlTagCallback(
     const xml::ConfigurationContext &context,
-    xml::XMLTag &                    callingTag)
+    xml::XMLTag                     &callingTag)
 {
   PRECICE_TRACE(callingTag.getFullName());
 
@@ -230,12 +230,12 @@ void AccelerationConfiguration::xmlTagCallback(
 
 void AccelerationConfiguration::xmlEndTagCallback(
     const xml::ConfigurationContext &context,
-    xml::XMLTag &                    callingTag)
+    xml::XMLTag                     &callingTag)
 {
   PRECICE_TRACE(callingTag.getName());
   if (callingTag.getNamespace() == TAG) {
 
-    //create preconditioner
+    // create preconditioner
     if (callingTag.getName() == VALUE_IQNILS || callingTag.getName() == VALUE_IQNIMVJ || callingTag.getName() == VALUE_AITKEN) {
 
       // if imvj restart-mode is of type RS-SVD, max number of non-const preconditioned time windows is limited by the chunksize

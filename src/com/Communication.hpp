@@ -176,9 +176,9 @@ public:
    * @param[in] acceptorRanks Set of ranks that accept a connection
    * @param[in] requesterRank Rank that requests the connection, usually the caller's rank
    */
-  virtual void requestConnectionAsClient(std::string const &  acceptorName,
-                                         std::string const &  requesterName,
-                                         std::string const &  tag,
+  virtual void requestConnectionAsClient(std::string const   &acceptorName,
+                                         std::string const   &requesterName,
+                                         std::string const   &tag,
                                          std::set<int> const &acceptorRanks,
                                          int                  requesterRank) = 0;
 
@@ -390,8 +390,8 @@ private:
  * rank "size" connects right to rank "0"
  */
 void connectCircularComm(
-    std::string const & participantName,
-    std::string const & tag,
+    std::string const  &participantName,
+    std::string const  &tag,
     int                 rank,
     int                 size,
     com::Communication &left,

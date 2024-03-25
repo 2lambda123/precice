@@ -18,7 +18,7 @@ void computeQRDecompositionCuda(const int deviceId, const std::shared_ptr<gko::E
   cudaSetDevice(deviceId);
 
   void *dWork{};
-  int * devInfo{};
+  int  *devInfo{};
 
   // Allocating important CUDA variables
   cudaMalloc((void **) &dWork, sizeof(double));

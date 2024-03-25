@@ -26,24 +26,24 @@ struct ExchangeData;
 class MultiCouplingScheme : public BaseCouplingScheme {
 public:
   /**
- * @brief Constructor.
- *
- * @param[in] maxTime Simulation time limit, or UNDEFINED_MAX_TIME.
- * @param[in] maxTimeWindows Simulation time windows limit, or UNDEFINED_TIME_WINDOWS.
- * @param[in] timeWindowSize Simulation time window size.
- * @param[in] localParticipant Name of participant using this coupling scheme.
- * @param[in] m2ns M2N communications to all other participants of coupling scheme.
- * @param[in] dtMethod Method used for determining the time window size, see https://www.precice.org/couple-your-code-timestep-sizes.html
- * @param[in] maxIterations maximum number of coupling sub-iterations allowed.
- */
+   * @brief Constructor.
+   *
+   * @param[in] maxTime Simulation time limit, or UNDEFINED_MAX_TIME.
+   * @param[in] maxTimeWindows Simulation time windows limit, or UNDEFINED_TIME_WINDOWS.
+   * @param[in] timeWindowSize Simulation time window size.
+   * @param[in] localParticipant Name of participant using this coupling scheme.
+   * @param[in] m2ns M2N communications to all other participants of coupling scheme.
+   * @param[in] dtMethod Method used for determining the time window size, see https://www.precice.org/couple-your-code-timestep-sizes.html
+   * @param[in] maxIterations maximum number of coupling sub-iterations allowed.
+   */
   MultiCouplingScheme(
       double                             maxTime,
       int                                maxTimeWindows,
       double                             timeWindowSize,
-      const std::string &                localParticipant,
+      const std::string                 &localParticipant,
       std::map<std::string, m2n::PtrM2N> m2ns,
       constants::TimesteppingMethod      dtMethod,
-      const std::string &                controller,
+      const std::string                 &controller,
       int                                minIterations,
       int                                maxIterations);
 
@@ -53,7 +53,7 @@ public:
       mesh::PtrMesh        mesh,
       bool                 requiresInitialization,
       bool                 exchangeSubsteps,
-      const std::string &  to);
+      const std::string   &to);
 
   /// Adds data to be received on data exchange.
   void addDataToReceive(
@@ -61,7 +61,7 @@ public:
       mesh::PtrMesh        mesh,
       bool                 requiresInitialization,
       bool                 exchangeSubsteps,
-      const std::string &  from);
+      const std::string   &from);
 
   void determineInitialDataExchange() override;
 

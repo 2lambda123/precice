@@ -70,7 +70,7 @@ void runTestQN(std::string const &config, TestContext const &context)
 
     if (context.isNamed("SolverOne")) {
       for (int i = 0; i < 4; i++) {
-        outValues[i] = inValues[i]; //only pushes solution through
+        outValues[i] = inValues[i]; // only pushes solution through
       }
     } else {
       outValues[0] = 2 * inValues[0] * inValues[0] - inValues[1] * inValues[2] - 8.0 + inValues[0];
@@ -89,7 +89,7 @@ void runTestQN(std::string const &config, TestContext const &context)
 
   interface.finalize();
 
-  //relative residual in config is 1e-7, so 2 orders of magnitude less strict
+  // relative residual in config is 1e-7, so 2 orders of magnitude less strict
   BOOST_TEST(outValues[0] == -2.0, boost::test_tools::tolerance(1e-5));
   BOOST_TEST(outValues[1] == 0.0, boost::test_tools::tolerance(1e-5));
   BOOST_TEST(outValues[2] == -2.0, boost::test_tools::tolerance(1e-5));
@@ -166,7 +166,7 @@ void runTestQNEmptyPartition(std::string const &config, TestContext const &conte
 
     if (context.isNamed("SolverOne")) {
       for (int i = 0; i < 4; i++) {
-        outValues[i] = inValues[i]; //only pushes solution through
+        outValues[i] = inValues[i]; // only pushes solution through
       }
     } else {
       outValues[0] = 2 * inValues[0] * inValues[0] - inValues[1] * inValues[2] - 8.0 + inValues[0];
@@ -188,7 +188,7 @@ void runTestQNEmptyPartition(std::string const &config, TestContext const &conte
 
   interface.finalize();
 
-  //relative residual in config is 1e-7, so 2 orders of magnitude less strict
+  // relative residual in config is 1e-7, so 2 orders of magnitude less strict
   if ((context.isNamed("SolverOne") and context.isPrimary()) or
       (context.isNamed("SolverTwo") and (not context.isPrimary()))) {
     BOOST_TEST(outValues[0] == -2.0, boost::test_tools::tolerance(1e-5));

@@ -78,7 +78,7 @@ public:
   WriteDataContext &operator=(const WriteDataContext &assign) = delete;
 
   /// Move constructor, use the implicitly declared.
-  WriteDataContext(WriteDataContext &&) = default;
+  WriteDataContext(WriteDataContext &&)            = default;
   WriteDataContext &operator=(WriteDataContext &&) = default;
 
 private:

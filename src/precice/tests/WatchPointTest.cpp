@@ -37,7 +37,7 @@ std::vector<double> readDoublesFromTXTFile(std::string const &filename, int skip
 }
 } // namespace
 
-void testWatchPoint(const TestContext & context,
+void testWatchPoint(const TestContext  &context,
                     bool                withEdge,
                     std::vector<double> watchPosition,
                     std::vector<double> expected)
@@ -73,10 +73,10 @@ void testWatchPoint(const TestContext & context,
   }
 
   using precice::testing::operator""_dataID;
-  PtrData                 doubleData   = mesh->createData("DoubleData", 1, 0_dataID);
-  PtrData                 vectorData   = mesh->createData("VectorData", 2, 1_dataID);
-  auto &                  doubleValues = doubleData->values();
-  auto &                  vectorValues = vectorData->values();
+  PtrData doubleData   = mesh->createData("DoubleData", 1, 0_dataID);
+  PtrData vectorData   = mesh->createData("VectorData", 2, 1_dataID);
+  auto   &doubleValues = doubleData->values();
+  auto   &vectorValues = vectorData->values();
   mesh->allocateDataValues();
 
   if (context.size > 1) {
@@ -289,8 +289,8 @@ BOOST_AUTO_TEST_CASE(Reinitialize)
 
   PtrData doubleData   = mesh->createData("DoubleData", 1, 0_dataID);
   PtrData vectorData   = mesh->createData("VectorData", 2, 1_dataID);
-  auto &  doubleValues = doubleData->values();
-  auto &  vectorValues = vectorData->values();
+  auto   &doubleValues = doubleData->values();
+  auto   &vectorValues = vectorData->values();
   mesh->allocateDataValues();
 
   // v1, v2 carry data 1
@@ -396,8 +396,8 @@ BOOST_AUTO_TEST_CASE(VolumetricInterpolation2D)
 
   PtrData doubleData   = mesh->createData("DoubleData", 1, 0_dataID);
   PtrData vectorData   = mesh->createData("VectorData", 2, 1_dataID);
-  auto &  doubleValues = doubleData->values();
-  auto &  vectorValues = vectorData->values();
+  auto   &doubleValues = doubleData->values();
+  auto   &vectorValues = vectorData->values();
   mesh->allocateDataValues();
 
   // Data is (1,1,2) for the scalar, and same for each vector component.
@@ -476,7 +476,7 @@ BOOST_AUTO_TEST_CASE(VolumetricInterpolation3D)
   mesh->createTetrahedron(v1, v2, v3, v4);
 
   PtrData doubleData   = mesh->createData("DoubleData", 1, 0_dataID);
-  auto &  doubleValues = doubleData->values();
+  auto   &doubleValues = doubleData->values();
   mesh->allocateDataValues();
 
   // Data is (1,1,2) for the scalar, and same for each vector component.
@@ -573,7 +573,7 @@ BOOST_AUTO_TEST_CASE(VolumetricParallel)
   }
 
   PtrData doubleData   = mesh->createData("DoubleData", 1, 0_dataID);
-  auto &  doubleValues = doubleData->values();
+  auto   &doubleValues = doubleData->values();
   mesh->allocateDataValues();
 
   // Data is (1, 2, 3, 4) on the tetra, other ranks agree on their subset

@@ -80,8 +80,8 @@ void ParticipantState::provideMesh(const mesh::PtrMesh &mesh)
   _usedMeshContexts.push_back(context);
 }
 
-void ParticipantState::receiveMesh(const mesh::PtrMesh &                         mesh,
-                                   const std::string &                           fromParticipant,
+void ParticipantState::receiveMesh(const mesh::PtrMesh                          &mesh,
+                                   const std::string                            &fromParticipant,
                                    double                                        safetyFactor,
                                    partition::ReceivedPartition::GeometricFilter geoFilter,
                                    const bool                                    allowDirectAccess)
@@ -151,7 +151,7 @@ mesh::PtrMesh ParticipantState::findMesh(std::string_view data) const
 {
   bool foundReadDataContextForAnyMesh = false;
   for (const auto &meshContext : _meshContexts) {
-    const auto &             mesh = meshContext.second->mesh->getName();
+    const auto              &mesh = meshContext.second->mesh->getName();
     MeshDataKey<std::string> key{mesh, std::string{data}};
     const auto               it = _readDataContexts.find(key);
     if (it != _readDataContexts.end()) {
