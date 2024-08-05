@@ -29,14 +29,14 @@ Bspline::Bspline(Eigen::VectorXd ts, const Eigen::MatrixXd &xs, int splineDegree
   auto relativeTime = [tsMin = _tsMin, tsMax = _tsMax](double t) -> double { return (t - tsMin) / (tsMax - tsMin); };
   ts                = ts.unaryExpr(relativeTime);
 
-  //The code for computing the knots and the control points is copied from Eigens bspline interpolation with minor modifications, https://gitlab.com/libeigen/eigen/-/blob/master/unsupported/Eigen/src/Splines/SplineFitting.h
+  // The code for computing the knots and the control points is copied from Eigens bspline interpolation with minor modifications, https://gitlab.com/libeigen/eigen/-/blob/master/unsupported/Eigen/src/Splines/SplineFitting.h
 
   Eigen::KnotAveraging(ts, splineDegree, _knots);
   Eigen::DenseIndex n = xs.cols();
   Eigen::MatrixXd   A = Eigen::MatrixXd::Zero(n, n);
 
   for (Eigen::DenseIndex i = 1; i < n - 1; ++i) {
-    //Attempt at hack... the spline dimension is not used here explicitly
+    // Attempt at hack... the spline dimension is not used here explicitly
     const Eigen::DenseIndex span = Eigen::Spline<double, 1>::Span(ts[i], splineDegree, _knots);
 
     // The segment call should somehow be told the spline order at compile time.

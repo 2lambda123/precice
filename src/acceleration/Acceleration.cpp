@@ -49,8 +49,8 @@ void Acceleration::concatenateCouplingData(
   Eigen::Index offset = 0;
   for (auto id : dataIDs) {
     Eigen::Index size      = cplData.at(id)->values().size();
-    auto &       values    = cplData.at(id)->values();
-    const auto & oldValues = cplData.at(id)->previousIteration();
+    auto        &values    = cplData.at(id)->values();
+    const auto  &oldValues = cplData.at(id)->previousIteration();
     PRECICE_ASSERT(targetValues.size() >= offset + size, "Target vector was not initialized.", targetValues.size(), offset + size);
     PRECICE_ASSERT(targetOldValues.size() >= offset + size, "Target vector was not initialized.");
     for (Eigen::Index i = 0; i < size; i++) {

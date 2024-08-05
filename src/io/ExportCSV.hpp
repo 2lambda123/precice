@@ -12,7 +12,7 @@ public:
   virtual void doExport(
       const std::string &name,
       const std::string &location,
-      const mesh::Mesh & mesh);
+      const mesh::Mesh  &mesh);
 
 private:
   mutable logging::Logger _log{"io::ExportCSV"};

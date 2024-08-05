@@ -275,7 +275,7 @@ void M2N::broadcastSendMesh(mesh::Mesh &mesh)
 }
 
 void M2N::scatterAllCommunicationMap(std::map<int, std::vector<int>> &localCommunicationMap,
-                                     mesh::Mesh &                     mesh)
+                                     mesh::Mesh                      &mesh)
 {
   PRECICE_ASSERT(utils::IntraComm::isParallel(),
                  "This method can only be used for parallel participants");

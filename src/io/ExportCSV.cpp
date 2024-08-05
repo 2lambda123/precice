@@ -38,7 +38,7 @@ struct StridedAccess {
 void ExportCSV::doExport(
     const std::string &name,
     const std::string &location,
-    const mesh::Mesh & mesh)
+    const mesh::Mesh  &mesh)
 {
   PRECICE_TRACE(name, location, mesh.getName());
   PRECICE_ASSERT(!name.empty());

@@ -19,7 +19,7 @@ void append(Eigen::VectorXd &v, double value);
 
 template <typename Derived1>
 void append(
-    Eigen::MatrixXd &                       A,
+    Eigen::MatrixXd                        &A,
     const Eigen::PlainObjectBase<Derived1> &B)
 {
   int n = A.rows(), m = A.cols();
@@ -35,7 +35,7 @@ void append(
 
 template <typename Derived1>
 void append(
-    Eigen::VectorXd &                       v,
+    Eigen::VectorXd                        &v,
     const Eigen::PlainObjectBase<Derived1> &app)
 {
   int n = v.size();

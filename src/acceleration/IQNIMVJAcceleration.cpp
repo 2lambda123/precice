@@ -206,7 +206,7 @@ void IQNIMVJAcceleration::updateDifferenceMatrices(
 
 // ==================================================================================
 void IQNIMVJAcceleration::computeQNUpdate(
-    const DataMap &  cplData,
+    const DataMap   &cplData,
     Eigen::VectorXd &xUpdate)
 {
   /**
@@ -353,7 +353,7 @@ void IQNIMVJAcceleration::buildJacobian()
 
 // ==================================================================================
 void IQNIMVJAcceleration::computeNewtonUpdateEfficient(
-    const DataMap &  cplData,
+    const DataMap   &cplData,
     Eigen::VectorXd &xUpdate)
 {
   PRECICE_TRACE();

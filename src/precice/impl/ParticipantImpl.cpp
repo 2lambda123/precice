@@ -648,7 +648,7 @@ int ParticipantImpl::setMeshVertex(
   PRECICE_TRACE(meshName);
   PRECICE_REQUIRE_MESH_MODIFY(meshName);
   MeshContext &context = _accessor->usedMeshContext(meshName);
-  auto &       mesh    = *context.mesh;
+  auto        &mesh    = *context.mesh;
   PRECICE_CHECK(position.size() == static_cast<unsigned long>(mesh.getDimensions()),
                 "Cannot set vertex for mesh \"{}\". Expected {} position components but found {}.", meshName, mesh.getDimensions(), position.size());
   auto index = mesh.createVertex(Eigen::Map<const Eigen::VectorXd>{position.data(), mesh.getDimensions()}).getID();
@@ -672,7 +672,7 @@ void ParticipantImpl::setMeshVertices(
   PRECICE_TRACE(meshName, positions.size(), ids.size());
   PRECICE_REQUIRE_MESH_MODIFY(meshName);
   MeshContext &context = _accessor->usedMeshContext(meshName);
-  auto &       mesh    = *context.mesh;
+  auto        &mesh    = *context.mesh;
 
   const auto meshDims             = mesh.getDimensions();
   const auto expectedPositionSize = ids.size() * meshDims;
@@ -1139,7 +1139,7 @@ void ParticipantImpl::setMeshAccessRegion(
   PRECICE_CHECK(!_accessRegionDefined, "setMeshAccessRegion may only be called once.");
 
   // Get the related mesh
-  MeshContext & context = _accessor->meshContext(meshName);
+  MeshContext  &context = _accessor->meshContext(meshName);
   mesh::PtrMesh mesh(context.mesh);
   int           dim = mesh->getDimensions();
   PRECICE_CHECK(boundingBox.size() == static_cast<unsigned long>(dim) * 2,
@@ -1182,7 +1182,7 @@ void ParticipantImpl::getMeshVertexIDsAndCoordinates(
   if (ids.empty() && coordinates.empty()) {
     return;
   }
-  const MeshContext & context = _accessor->meshContext(meshName);
+  const MeshContext  &context = _accessor->meshContext(meshName);
   const mesh::PtrMesh mesh(context.mesh);
 
   const auto &vertices = mesh->vertices();
