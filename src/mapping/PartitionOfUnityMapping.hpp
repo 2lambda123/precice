@@ -170,7 +170,7 @@ void PartitionOfUnityMapping<RADIAL_BASIS_FUNCTION_T>::computeMapping()
   // Step 2: check, which of the resulting clusters are non-empty and register the cluster centers in a mesh
   // Here, the VertexCluster computes the matrix decompositions directly in case the cluster is non-empty
   mesh::Mesh centerMesh("pou-centers-" + inMesh->getName(), this->getDimensions(), mesh::Mesh::MESH_ID_UNDEFINED);
-  auto &     meshVertices = centerMesh.vertices();
+  auto      &meshVertices = centerMesh.vertices();
 
   meshVertices.clear();
   _clusters.clear();

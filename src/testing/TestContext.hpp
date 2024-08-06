@@ -55,7 +55,7 @@ struct ParticipantState {
 
   /// Constructs a serial participant with a given name
   explicit ParticipantState(std::string n)
-      : name(std::move(n)){};
+      : name(std::move(n)) {};
 
   /** Injects the amount of ranks this participant should run on.
    *
@@ -309,7 +309,7 @@ private:
   }
 
   template <class NextOption, class... Rest>
-  void handleOptions(Participants &participants, NextOption &next, Rest &... rest)
+  void handleOptions(Participants &participants, NextOption &next, Rest &...rest)
   {
     handleOption(participants, next);
     handleOptions(participants, rest...);

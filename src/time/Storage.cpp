@@ -187,13 +187,13 @@ Eigen::VectorXd Storage::sample(double time) const
 
   PRECICE_ASSERT(usedDegree >= 1);
 
-  //Return the sample corresponding to time if it exists
+  // Return the sample corresponding to time if it exists
   const int i = findTimeId(time);
   if (i > -1) {                              // _stampleStorage contains sample at given time
     return _stampleStorage[i].sample.values; // don't use getTimesAndValues, because this would iterate over the complete _stampleStorage.
   }
 
-  //Create a new bspline if _bspline does not already contain a spline
+  // Create a new bspline if _bspline does not already contain a spline
   if (!_bspline.has_value()) {
     auto [times, values] = getTimesAndValues();
     _bspline.emplace(times, values, usedDegree);

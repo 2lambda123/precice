@@ -110,7 +110,7 @@ void PythonAction::performAction()
       PRECICE_CHECK(math::equals(sourceStample.timestamp, targetStample.timestamp), "Trying to perform python action on samples with different timestamps: {} for source data and {} for target data. Time mesh of source data and target data must agree.", sourceStample.timestamp, targetStample.timestamp);
       i++;
       npy_intp sourceDim[]  = {_sourceData->values().size()};
-      double * sourceValues = _sourceData->values().data();
+      double  *sourceValues = _sourceData->values().data();
       _sourceValues         = PyArray_SimpleNewFromData(1, sourceDim, NPY_DOUBLE, sourceValues);
       PRECICE_CHECK(_sourceValues != nullptr, "Creating python source values failed. Please check that the source data name is used by the mesh in action:python.");
       PyTuple_SetItem(dataArgs, 1, _sourceValues);
@@ -118,7 +118,7 @@ void PythonAction::performAction()
 
     _targetData->values() = targetStample.sample.values; // put data into temporary buffer
     npy_intp targetDim[]  = {_targetData->values().size()};
-    double * targetValues = _targetData->values().data();
+    double  *targetValues = _targetData->values().data();
     // PRECICE_ASSERT(_targetValues == NULL);
     _targetValues = PyArray_SimpleNewFromData(1, targetDim, NPY_DOUBLE, targetValues);
     PRECICE_CHECK(_targetValues != nullptr, "Creating python target values failed. Please check that the target data name is used by the mesh in action:python.");

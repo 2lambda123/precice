@@ -127,7 +127,7 @@ void WatchPoint::exportPointData(
 
 void WatchPoint::getValue(
     Eigen::VectorXd &value,
-    mesh::PtrData &  data)
+    mesh::PtrData   &data)
 {
   int                    dim = _mesh->getDimensions();
   Eigen::VectorXd        temp(dim);
@@ -143,7 +143,7 @@ void WatchPoint::getValue(
 }
 
 void WatchPoint::getValue(
-    double &       value,
+    double        &value,
     mesh::PtrData &data)
 {
   const Eigen::VectorXd &values = data->values();

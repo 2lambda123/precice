@@ -78,7 +78,7 @@ public:
       ::precice::string_view configurationFileName,
       int                    solverProcessIndex,
       int                    solverProcessSize,
-      void *                 communicator);
+      void                  *communicator);
 
   ~Participant();
 

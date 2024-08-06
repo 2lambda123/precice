@@ -1304,10 +1304,10 @@ using MeshSpecification = std::vector<VertexSpecification>;
 /// Contains which values are expected on which rank: rank -> vector of data.
 using ReferenceSpecification = std::vector<std::pair<int, std::vector<double>>>;
 
-void getDistributedMesh(const TestContext &      context,
+void getDistributedMesh(const TestContext       &context,
                         MeshSpecification const &vertices,
-                        mesh::PtrMesh &          mesh,
-                        mesh::PtrData &          data,
+                        mesh::PtrMesh           &mesh,
+                        mesh::PtrData           &data,
                         int                      globalIndexOffset = 0,
                         bool                     meshIsSmaller     = false)
 {
@@ -1347,8 +1347,8 @@ void getDistributedMesh(const TestContext &      context,
   data->values() = d;
 }
 
-void testDistributed(const TestContext &    context,
-                     Mapping &              mapping,
+void testDistributed(const TestContext     &context,
+                     Mapping               &mapping,
                      MeshSpecification      inMeshSpec,
                      MeshSpecification      outMeshSpec,
                      ReferenceSpecification referenceSpec,
@@ -1677,7 +1677,7 @@ void testTagging(const TestContext &context,
 
   for (const auto &v : inMesh->vertices()) {
     auto pos   = std::find_if(shouldTagFirstRound.begin(), shouldTagFirstRound.end(),
-                            [meshDimension, &v](const VertexSpecification &spec) {
+                              [meshDimension, &v](const VertexSpecification &spec) {
                               return std::equal(spec.position.data(), spec.position.data() + meshDimension, v.getCoords().data());
                             });
     bool found = pos != shouldTagFirstRound.end();
@@ -1691,12 +1691,12 @@ void testTagging(const TestContext &context,
 
   for (const auto &v : inMesh->vertices()) {
     auto posFirst    = std::find_if(shouldTagFirstRound.begin(), shouldTagFirstRound.end(),
-                                 [meshDimension, &v](const VertexSpecification &spec) {
+                                    [meshDimension, &v](const VertexSpecification &spec) {
                                    return std::equal(spec.position.data(), spec.position.data() + meshDimension, v.getCoords().data());
                                  });
     bool foundFirst  = posFirst != shouldTagFirstRound.end();
     auto posSecond   = std::find_if(shouldTagSecondRound.begin(), shouldTagSecondRound.end(),
-                                  [meshDimension, &v](const VertexSpecification &spec) {
+                                    [meshDimension, &v](const VertexSpecification &spec) {
                                     return std::equal(spec.position.data(), spec.position.data() + meshDimension, v.getCoords().data());
                                   });
     bool foundSecond = posSecond != shouldTagSecondRound.end();
@@ -1716,14 +1716,14 @@ BOOST_AUTO_TEST_CASE(testTagFirstRound)
   MeshSpecification outMeshSpec = {
       {0, -1, {0, 0}, {0}}};
   MeshSpecification inMeshSpec = {
-      {0, -1, {-1, 0}, {1}}, //inside
-      {0, -1, {-3, 0}, {1}}, //outside
-      {0, 0, {1, 0}, {1}},   //inside, owner
-      {0, -1, {3, 0}, {1}},  //outside
-      {0, -1, {0, -1}, {1}}, //inside
-      {0, -1, {0, -3}, {1}}, //outside
-      {0, -1, {0, 1}, {1}},  //inside
-      {0, -1, {0, 3}, {1}}   //outside
+      {0, -1, {-1, 0}, {1}}, // inside
+      {0, -1, {-3, 0}, {1}}, // outside
+      {0, 0, {1, 0}, {1}},   // inside, owner
+      {0, -1, {3, 0}, {1}},  // outside
+      {0, -1, {0, -1}, {1}}, // inside
+      {0, -1, {0, -3}, {1}}, // outside
+      {0, -1, {0, 1}, {1}},  // inside
+      {0, -1, {0, 3}, {1}}   // outside
   };
   MeshSpecification shouldTagFirstRound = {
       {0, -1, {-1, 0}, {1}},

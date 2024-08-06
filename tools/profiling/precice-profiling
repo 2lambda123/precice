@@ -391,16 +391,18 @@ class Run:
                             "ts": e["ts"],
                             "dur": e["dur"],
                         },
-                        {}
-                        if "data" not in e
-                        else {
-                            "args": dict(
-                                zip(
-                                    map(self.lookupEvent, e["data"].keys()),
-                                    e["data"].values(),
+                        (
+                            {}
+                            if "data" not in e
+                            else {
+                                "args": dict(
+                                    zip(
+                                        map(self.lookupEvent, e["data"].keys()),
+                                        e["data"].values(),
+                                    )
                                 )
-                            )
-                        },
+                            }
+                        ),
                     )
                 )
 
@@ -417,13 +419,15 @@ class Run:
                     self.lookupEvent(e["eid"]),
                     e["ts"],
                     e["dur"] * factor,
-                    ""
-                    if "data" not in e
-                    else str(
-                        dict(
-                            zip(
-                                map(self.lookupEvent, e["data"].keys()),
-                                e["data"].values(),
+                    (
+                        ""
+                        if "data" not in e
+                        else str(
+                            dict(
+                                zip(
+                                    map(self.lookupEvent, e["data"].keys()),
+                                    e["data"].values(),
+                                )
                             )
                         )
                     ),

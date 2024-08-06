@@ -10,7 +10,7 @@
 namespace precice::xml {
 
 XMLTag::XMLTag(
-    Listener &  listener,
+    Listener   &listener,
     std::string tagName,
     Occurrence  occurrence,
     std::string xmlNamespace)
@@ -380,11 +380,11 @@ void XMLTag::clear()
   _subtags.clear();
 }
 
-//NoPListener& getNoPListener()
+// NoPListener& getNoPListener()
 //{
-//  static NoPListener listener;
-//  return listener;
-//}
+//   static NoPListener listener;
+//   return listener;
+// }
 
 XMLTag getRootTag()
 {
@@ -393,7 +393,7 @@ XMLTag getRootTag()
 }
 
 void configure(
-    XMLTag &                                  tag,
+    XMLTag                                   &tag,
     const precice::xml::ConfigurationContext &context,
     std::string_view                          configurationFilename)
 {
@@ -423,11 +423,11 @@ std::string XMLTag::getOccurrenceString(XMLTag::Occurrence occurrence)
 }
 } // namespace precice::xml
 
-//std::ostream& operator<<
+// std::ostream& operator<<
 //(
-//  std::ostream&                 os,
-//  const precice::xml::XMLTag& tag )
+//   std::ostream&                 os,
+//   const precice::xml::XMLTag& tag )
 //{
-//  os << tag.printDocumentation(80, 0);
-//  return os;
-//}
+//   os << tag.printDocumentation(80, 0);
+//   return os;
+// }

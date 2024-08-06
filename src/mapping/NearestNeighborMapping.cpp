@@ -33,7 +33,7 @@ void NearestNeighborMapping::mapConservative(const time::Sample &inData, Eigen::
   PRECICE_DEBUG("Map conservative using {}", getName());
 
   const Eigen::VectorXd &inputValues  = inData.values;
-  Eigen::VectorXd &      outputValues = outData;
+  Eigen::VectorXd       &outputValues = outData;
 
   // Data dimensions (for scalar = 1, for vectors > 1)
   const size_t inSize          = input()->vertices().size();
@@ -60,7 +60,7 @@ void NearestNeighborMapping::mapConsistent(const time::Sample &inData, Eigen::Ve
   PRECICE_DEBUG("Map {} using {}", (hasConstraint(CONSISTENT) ? "consistent" : "scaled-consistent"), getName());
 
   const Eigen::VectorXd &inputValues  = inData.values;
-  Eigen::VectorXd &      outputValues = outData;
+  Eigen::VectorXd       &outputValues = outData;
 
   // Data dimensions (for scalar = 1, for vectors > 1)
   const size_t outSize         = output()->vertices().size();

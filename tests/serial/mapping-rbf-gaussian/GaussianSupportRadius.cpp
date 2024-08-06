@@ -11,9 +11,9 @@ BOOST_AUTO_TEST_SUITE(MappingRbfGaussian)
 BOOST_AUTO_TEST_CASE(GaussianSupportRadius)
 {
   /**
- * @brief Tests the Gaussian rbf mapping using the support radius option
- *
- */
+   * @brief Tests the Gaussian rbf mapping using the support radius option
+   *
+   */
   PRECICE_TEST("SolverOne"_on(1_rank), "SolverTwo"_on(1_rank));
   testRBFMapping(context.config(), context);
 }

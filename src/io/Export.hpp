@@ -16,11 +16,11 @@ class Export {
 public:
   virtual ~Export() = default;
 
-  Export()               = default;
-  Export(const Export &) = delete;
-  Export(Export &&)      = delete;
+  Export()                          = default;
+  Export(const Export &)            = delete;
+  Export(Export &&)                 = delete;
   Export &operator=(const Export &) = delete;
-  Export &operator=(Export &&) = delete;
+  Export &operator=(Export &&)      = delete;
 
   /**
    * @brief Does export. Has to be implemented in subclass.
@@ -32,7 +32,7 @@ public:
   virtual void doExport(
       const std::string &name,
       const std::string &location,
-      const mesh::Mesh & mesh) = 0;
+      const mesh::Mesh  &mesh) = 0;
 };
 
 } // namespace io

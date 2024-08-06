@@ -155,7 +155,7 @@ void RadialBasisFctMapping<SOLVER_T, Args...>::computeMapping()
     }
 
     // Forwarding the tuples here requires some template magic I don't want to implement
-    if constexpr (std::tuple_size_v<std::tuple<Args...>>> 0) {
+    if constexpr (std::tuple_size_v < std::tuple < Args... >>> 0) {
       _rbfSolver = std::make_unique<SOLVER_T>(this->_basisFunction, globalInMesh, boost::irange<Eigen::Index>(0, globalInMesh.vertices().size()),
                                               globalOutMesh, boost::irange<Eigen::Index>(0, globalOutMesh.vertices().size()), this->_deadAxis, _polynomial, std::get<0>(optionalArgs));
     } else {
@@ -178,7 +178,7 @@ void RadialBasisFctMapping<SOLVER_T, Args...>::clear()
 template <typename SOLVER_T, typename... Args>
 std::string RadialBasisFctMapping<SOLVER_T, Args...>::getName() const
 {
-  if constexpr (std::tuple_size_v<std::tuple<Args...>>> 0) {
+  if constexpr (std::tuple_size_v < std::tuple < Args... >>> 0) {
     auto        param = std::get<0>(optionalArgs);
     std::string exec  = param.executor;
     if (param.solver == "qr-solver") {

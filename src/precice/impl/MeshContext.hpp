@@ -15,8 +15,8 @@ namespace impl {
 /// Stores a mesh and related objects and data.
 struct MeshContext {
   /** Upgrades the mesh requirement to a more specific level.
-    * @param[in] requirement The requirement to upgrade to.
-    */
+   * @param[in] requirement The requirement to upgrade to.
+   */
   void require(mapping::Mapping::MeshRequirement requirement);
 
   /// Mesh holding the geometry data structure.

@@ -44,7 +44,7 @@ void ExportVTP::writeParallelCells(std::ostream &out) const
 }
 
 void ExportVTP::exportConnectivity(
-    std::ostream &    outFile,
+    std::ostream     &outFile,
     const mesh::Mesh &mesh) const
 {
   outFile << "         <Lines>\n";

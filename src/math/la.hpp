@@ -12,7 +12,7 @@ namespace math {
  */
 template <typename DerivedA, typename DerivedB>
 void sumSubvectors(const Eigen::MatrixBase<DerivedA> &vector,
-                   Eigen::MatrixBase<DerivedB> &      result)
+                   Eigen::MatrixBase<DerivedB>       &result)
 {
   int vectorSize    = vector.size();
   int subvectorSize = result.size();

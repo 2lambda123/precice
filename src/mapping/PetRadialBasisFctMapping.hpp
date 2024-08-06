@@ -358,7 +358,7 @@ void PetRadialBasisFctMapping<RADIAL_BASIS_FUNCTION_T>::computeMapping()
   auto zeros = petsc::Vector::allocate(_matrixC);
   VecZeroEntries(zeros);
   zeros.assemble();
-  //MatDiagonalSet(_matrixC, zeros, INSERT_VALUES);
+  // MatDiagonalSet(_matrixC, zeros, INSERT_VALUES);
   MatDiagonalSet(_matrixC, zeros, ADD_VALUES);
 
   // Begin assembly here, all assembly is ended at the end of this function.
@@ -573,8 +573,8 @@ void PetRadialBasisFctMapping<RADIAL_BASIS_FUNCTION_T>::mapConsistent(const time
   precice::profiling::Event e("map.pet.mapData.From" + this->input()->getName() + "To" + this->output()->getName(), profiling::Synchronize);
 
   PetscErrorCode ierr      = 0;
-  auto const &   inValues  = inData.values;
-  auto &         outValues = outData;
+  auto const    &inValues  = inData.values;
+  auto          &outValues = outData;
 
   int const valueDim = inData.dataDims;
   PRECICE_ASSERT(this->hasConstraint(Mapping::CONSISTENT) || this->isScaledConsistent());
@@ -700,8 +700,8 @@ void PetRadialBasisFctMapping<RADIAL_BASIS_FUNCTION_T>::mapConservative(const ti
   precice::profiling::Event e("map.pet.mapData.From" + this->input()->getName() + "To" + this->output()->getName(), profiling::Synchronize);
 
   PetscErrorCode ierr      = 0;
-  auto const &   inValues  = inData.values;
-  auto &         outValues = outData;
+  auto const    &inValues  = inData.values;
+  auto          &outValues = outData;
 
   int const valueDim = inData.dataDims;
   PRECICE_ASSERT(this->hasConstraint(Mapping::CONSERVATIVE));
@@ -837,7 +837,8 @@ void PetRadialBasisFctMapping<RADIAL_BASIS_FUNCTION_T>::printMappingInfo(int dim
     constraintName = "conservative";
   }
 
-  const std::string polynomialName = _polynomial == Polynomial::ON ? "on" : _polynomial == Polynomial::OFF ? "off" : "separate";
+  const std::string polynomialName = _polynomial == Polynomial::ON ? "on" : _polynomial == Polynomial::OFF ? "off"
+                                                                                                           : "separate";
 
   PRECICE_INFO("Mapping {} for dimension {} with polynomial set to {}",
                constraintName, dim, polynomialName);
